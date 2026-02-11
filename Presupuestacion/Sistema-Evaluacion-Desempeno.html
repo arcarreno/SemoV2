@@ -11,14 +11,46 @@
     <link rel="stylesheet" href="../styles.css">
     
     <style>
-        :root {
-            --guinda-1: #691C32;
-            --dorado-8: #BC955C;
-            --gris-2: #333333;
-            --verde-3: #11322A;
-            --blanco: #ffffff;
-            --crema-4: #f4f4f4;
-        }
+
+           @media (max-width: 1199.98px) {
+    /*  Fondo guinda sólido para el panel desplegable completo */
+    .navbar-collapse {
+        background-color: var(--guinda-1);
+        padding: 15px;
+        margin-top: 10px;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3); /* Sombra para que resalte */
+    }
+
+    /* Letras blancas para los enlaces principales */
+    .navbar-collapse .nav-link {
+        color: #ffffff !important;
+        border-radius: 5px;
+    }
+
+    /* Fondo guinda también para los submenús (Ingreso, Gasto) y quitar su borde superior */
+    .navbar-collapse .dropdown-menu {
+        background-color: transparent;
+        border: none;
+        padding-left: 15px; /* Sangría para diferenciar el submenú */
+        margin-top: 0;
+    }
+
+    /*  Letras blancas para los elementos dentro de los submenús */
+    .navbar-collapse .dropdown-item {
+        color: #ffffff !important;
+        border-radius: 5px;
+    }
+
+    /*  Efecto Hover al pasar el dedo/mouse en móvil (Fondo traslúcido y letras doradas) */
+    .navbar-collapse .nav-link:hover, 
+    .navbar-collapse .dropdown-item:hover,
+    .navbar-collapse .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        color: var(--dorado-8) !important;
+    }
+}
+       
 
         body {
             font-family: 'Montserrat', sans-serif;
@@ -386,7 +418,7 @@
 
     </div>
 
-    <footer class="footer-section bg-secondary text-white py-5" style="background-color: var(--gris-2) !important;">
+    <footer class="footer-section bg-secondary text-white py-5" style="background-color: var(--verde-3) !important;">
         <div class="container">
             <div class="row gy-4">
                 <div class="col-lg-4">

@@ -14,6 +14,45 @@
     <style>
         /* --- ESTILOS ESPECÍFICOS DE DATOS ABIERTOS --- */
         
+        @media (max-width: 1199.98px) {
+    /*  Fondo guinda sólido para el panel desplegable completo */
+    .navbar-collapse {
+        background-color: var(--guinda-1);
+        padding: 15px;
+        margin-top: 10px;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3); /* Sombra para que resalte */
+    }
+
+    /* Letras blancas para los enlaces principales */
+    .navbar-collapse .nav-link {
+        color: #ffffff !important;
+        border-radius: 5px;
+    }
+
+    /* Fondo guinda también para los submenús (Ingreso, Gasto) y quitar su borde superior */
+    .navbar-collapse .dropdown-menu {
+        background-color: transparent;
+        border: none;
+        padding-left: 15px; /* Sangría para diferenciar el submenú */
+        margin-top: 0;
+    }
+
+    /*  Letras blancas para los elementos dentro de los submenús */
+    .navbar-collapse .dropdown-item {
+        color: #ffffff !important;
+        border-radius: 5px;
+    }
+
+    /*  Efecto Hover al pasar el dedo/mouse en móvil (Fondo traslúcido y letras doradas) */
+    .navbar-collapse .nav-link:hover, 
+    .navbar-collapse .dropdown-item:hover,
+    .navbar-collapse .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        color: var(--dorado-8) !important;
+    }
+}
+
         .page-header {
             background: linear-gradient(135deg, var(--guinda-1), var(--verde-3)), url('../models/images/banner_home.png');
             background-size: cover;
