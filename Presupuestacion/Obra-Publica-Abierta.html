@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obra Pública Abierta - Transparencia Presupuestaria Puebla</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <link rel="stylesheet" href="../styles.css">
+    
+    <style>
+
+         .featured-box {
+            background-color: var(--verde-3);
+            color: var(--blanco);
+            border-radius: 12px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column; /* Móvil: columna */
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 60px;
+            border-left: 10px solid var(--dorado-8);
+        }
+
+        /* En pantallas grandes, cambia a fila */
+        @media (min-width: 768px) {
+            .featured-box {
+                flex-direction: row;
+                text-align: left;
+            }
+        }
+
+        .featured-icon {
+            font-size: 3rem;
+            color: var(--crema-4);
+        }
+
+        .featured-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--crema-4);
+        }
+
+        /* --- ESTILOS GENERALES Y HEADER --- */
+        .page-header {
+            background: linear-gradient(135deg, var(--guinda-1), var(--verde-3)), url('../models/images/banner_home.png');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: multiply;
+            color: var(--blanco);
+            padding: 100px 0 60px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: 40px;
+            border-bottom: 5px solid var(--dorado-8);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0px var(--verde-3);
+        }
+
+        /* --- MAPA --- */
+        .map-container {
+            height: 600px;
+            width: 100%;
+            border-radius: 12px;
+            border: 2px solid var(--dorado-8);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        #map { height: 100%; width: 100%; }
+
+        /* --- FILTRO FLOTANTE PREMIUM (ESTILOS INTEGRADOS) --- */
+        .floating-filters {
+            position: fixed;
+            top: 200px;
+            right: 0;
+            width: 320px;
+            z-index: 9999;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .floating-filters.collapsed { transform: translateX(100%); }
+        .floating-filters.active { transform: translateX(0); }
+
+        .filter-content {
+            background: linear-gradient(135deg, var(--guinda-1) 0%, #5a122e 100%);
+            padding: 30px 25px;
+            border-radius: 30px 0 0 30px; /* Redondeado solo izquierda */
+            box-shadow: -10px 10px 30px rgba(0,0,0,0.3);
+            border-left: 5px solid var(--dorado-8);
+            color: white;
+        }
+
+        .filter-tab {
+            position: absolute;
+            top: 30px;
+            left: -50px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--guinda-1);
+            color: var(--crema-4);
+            border: none;
+            border-radius: 15px 0 0 15px;
+            box-shadow: -5px 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            font-size: 1.3rem;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tab:hover {
+            background-color: var(--crema-4);
+            color: var(--guinda-1);
+            width: 55px;
+            left: -55px;
+        }
+
+        /* Inputs Personalizados del Filtro */
+        .filter-label {
+            color: var(--crema-4);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .input-wrapper { position: relative; }
+
+        .custom-select {
+            border-radius: 50px;
+            padding: 10px 20px;
+            border: 2px solid transparent;
+            font-size: 0.9rem;
+            color: var(--gris-2);
+            background-color: #fff;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            appearance: none; 
+            -webkit-appearance: none;
+        }
+
+        .custom-select:focus {
+            outline: none;
+            border-color: var(--crema-4);
+            box-shadow: 0 0 0 4px rgba(219, 198, 179, 0.3);
+        }
+
+        .select-arrow {
+            position: absolute;
+            right: 20px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--guinda-1);
+            pointer-events: none;
+            font-size: 0.8rem;
+        }
+
+        .btn-apply-filter {
+            background-color: var(--crema-4);
+            color: var(--guinda-1);
+            border-radius: 50px;
+            padding: 12px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            border: 2px solid var(--crema-4);
+            transition: all 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-apply-filter:hover {
+            background-color: transparent;
+            color: var(--crema-4);
+            transform: translateY(-2px);
+        }
+
+        /* --- ESTADÍSTICAS --- */
+        .stat-card {
+            background: var(--blanco);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-bottom: 4px solid var(--verde-3);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            height: 100%; /* Para que tengan la misma altura */
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--guinda-1);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gris-2);
+            text-transform: uppercase;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--guinda-1);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999; transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .preloader.hidden { opacity: 0; visibility: hidden; }
+        .loader-img {
+            width: 150px; height: auto; object-fit: contain;
+            animation: latido 2s infinite ease-in-out;
+        }
+        @keyframes latido {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .featured-box {
+            background-color: var(--verde-3);
+            color: var(--blanco);
+            border-radius: 12px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 60px;
+            border-left: 10px solid var(--dorado-8);
+        }
+
+        @media (min-width: 768px) {
+            .featured-box {
+                flex-direction: row;
+                text-align: left;
+            }
+        }
+
+        .featured-icon {
+            font-size: 3rem;
+            color: var(--crema-4);
+        }
+
+        .featured-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--crema-4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="preloader" id="preloader">
+        <img src="../models/images/semo.png" alt="Cargando..." class="loader-img">
+    </div>
+
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="top-left">
+                <a href="../Portal.html" class="top-link">
+                    <i class="fas fa-landmark"></i> Gobierno de Puebla
+                </a>
+            </div>
+            <div class="top-right">
+                <a href="#"><i class="fas fa-search"></i> Buscar</a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <div class="container nav-content">
+            <a href="../Portal.html" class="brand-link">
+                <div class="brand-area">
+                    <img src="../models/images/image.png" alt="Gobierno de Puebla" class="logo-img">
+                    <div class="vertical-divider"></div>
+                    <div class="site-title">
+                        <span class="title-bold">TRANSPARENCIA</span>
+                        <span class="title-light">PRESUPUESTARIA</span>
+                        <span class="title-sub">Gobierno del Estado de Puebla</span>
+                    </div>
+                </div>
+            </a>
+
+            <div class="nav-links">
+                <a href="../Presupuestacion/Ciclo-Presupuestario.html" class="nav-link"><i class="fas fa-sync-alt"></i> CICLO</a>
+                <a href="../Presupuestacion/Planeacion.html" class="nav-link"><i class="fas fa-chart-line"></i> PLANEACIÓN</a>
+                
+                <div class="dropdown">
+                    <a href="#ingreso" class="nav-link dropdown-toggle"><i class="fas fa-arrow-down"></i> INGRESO</a>
+                    <div class="dropdown-menu">
+                        <a href="../Presupuestacion/Ingresos-Federales.html" class="dropdown-item">Ingresos Federales</a>
+                        <a href="../Presupuestacion/Recaudacion-Local.html" class="dropdown-item">Recaudación Local</a>
+                    </div>
+                </div>
+                
+                <div class="dropdown">
+                    <a href="#gasto" class="nav-link dropdown-toggle"><i class="fas fa-arrow-up"></i> GASTO</a>
+                    <div class="dropdown-menu">
+                        <a href="../Presupuestacion/Programas.html" class="dropdown-item">Programas</a>
+                        <a href="../Presupuestacion/Obra-Publica-Abierta.html" class="dropdown-item">Obra Pública</a>
+                        <a href="../Presupuestacion/Entidades-Federativas.html" class="dropdown-item">Entidades</a>
+                        <a href="../Presupuestacion/Ramo23.html" class="dropdown-item">Ramo 23</a>
+                    </div>
+                </div>
+                
+                <a href="../Presupuestacion/Sistema-Evaluacion-Desempeno.html" class="nav-link"><i class="fas fa-chart-bar"></i> EVALUACIÓN</a>
+                <a href="../Presupuestacion/Datos-Abiertos.html" class="nav-link"><i class="fas fa-database"></i> DATOS</a>
+                <a href="../Presupuestacion/Capacitacion.html" class="nav-link"><i class="fas fa-graduation-cap"></i> CAPACITACIÓN</a>
+                
+                <button class="search-icon-btn"><i class="fas fa-search"></i></button>
+            </div>
+
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>Obra Pública Abierta</h1>
+            <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto;">
+                En esta sección encontrarás información sobre los recursos que las instituciones del Gobierno Federal destinan a proyectos de inversión.
+            </p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="featured-box">
+            <div class="featured-icon">
+                <i class="fas fa-search"></i> </div>
+            <div class="featured-content" style="flex: 1;">
+                <h3>¿Cómo localizo una obra pública?</h3>
+                <p style="opacity: 0.9;">
+                   Para obtener más información sobre obras públicas en México, da clic en su punto de ubicación en el mapa e ingresa a la ficha con los detalles.
+                   Puedes utilizar los buscadores para localizar un proyecto por nombre, clave de cartera o los filtros.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="margin-bottom: 80px;">
+        
+        <div class="row g-3 mb-5">
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <span class="stat-number">1,245</span>
+                    <span class="stat-label">Obras Activas</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <span class="stat-number">$8.5MM</span>
+                    <span class="stat-label">Inversión Total</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <span class="stat-number">217</span>
+                    <span class="stat-label">Municipios</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card">
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">Avance Financiero</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Mapa de Obras</h2>
+        <p class="section-subtitle">Explora las obras públicas realizadas en el año 2026.</p>
+
+        <div class="map-container">
+            <div id="map"></div>
+            
+            <div id="floatingFilters" class="floating-filters collapsed">
+                
+                <button id="filterTabBtn" class="filter-tab" title="Abrir Filtros">
+                    <i class="fas fa-filter"></i>
+                </button>
+
+                <div class="filter-content">
+                    <div class="filter-header mb-4">
+                        <h4 class="m-0"><i class="fas fa-search-location me-2"></i>Buscador</h4>
+                        <p class="small text-white-50 m-0">Selecciona criterios</p>
+                    </div>
+                    
+                    <div class="filter-block mb-3">
+                        <label class="filter-label"><i class="fas fa-map-marker-alt"></i> Municipio</label>
+                        <div class="input-wrapper">
+                            <select class="custom-select w-100">
+                                <option selected>Todos los municipios</option>
+                                <option>Puebla</option>
+                                <option>Tehuacán</option>
+                                <option>Atlixco</option>
+                            </select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-block mb-3">
+                        <label class="filter-label"><i class="fas fa-hard-hat"></i> Sector</label>
+                        <div class="input-wrapper">
+                            <select class="custom-select w-100">
+                                <option selected>Todos los sectores</option>
+                                <option>Educación</option>
+                                <option>Salud</option>
+                                <option>Carreteras</option>
+                            </select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-block mb-4">
+                        <label class="filter-label"><i class="fas fa-tasks"></i> Estatus</label>
+                        <div class="input-wrapper">
+                            <select class="custom-select w-100">
+                                <option selected>Cualquier estatus</option>
+                                <option>En Ejecución</option>
+                                <option>Concluidas</option>
+                            </select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-apply-filter">
+                        VER RESULTADOS
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="featured-box mt-5">
+            <div class="featured-icon">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <div class="featured-content" style="flex: 1;">
+                <h3>NOTA:</h3>
+                <p style="opacity: 0.9;">
+                   Último periodo de actualización: tercer trimestre de 2025.
+                </p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="#" class="btn btn-lg" style="background-color: var(--verde-3); color: white; padding: 15px 30px; border-radius: 50px;">
+                <i class="fas fa-download me-2"></i> Descargar Base de Datos (KML/CSV)
+            </a>
+        </div>
+
+    </div>
+
+     <footer class="footer-section">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo-placeholder">
+                        <img src="../models/images/image.png" alt="Gobierno de Puebla" class="footer-logo-img">
+                    </div>
+                    <div class="footer-titles">
+                        <h4>TRANSPARENCIA PRESUPUESTARIA</h4>
+                        <p>Gobierno del Estado de Puebla</p>
+                    </div>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h5>Transparencia</h5>
+                        <ul>
+                            <li><a href="#">Portal de Transparencia</a></li>
+                            <li><a href="#">Información Pública</a></li>
+                            <li><a href="#">Protección de Datos</a></li>
+                            <li><a href="#">Avisos de Privacidad</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h5>Recursos</h5>
+                        <ul>
+                            <li><a href="#">Documentos Oficiales</a></li>
+                            <li><a href="#">Leyes y Reglamentos</a></li>
+                            <li><a href="#">Estadísticas</a></li>
+                            <li><a href="#">API Documentación</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h5>Contacto</h5>
+                        <ul>
+                            <li><i class="fas fa-phone"></i> (222) 123 4567</li>
+                            <li><i class="fas fa-envelope"></i> transparencia@puebla.gob.mx</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Puebla, México</li>
+                        </ul>
+                    </div>
+                    <div class="footer-column" style="text-align: right;">
+                        <h5>Síguenos</h5>
+                        <div class="social-icons" style="text-align: right;">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Gobierno del Estado de Puebla. Todos los derechos reservados.</p>
+                <p class="footer-version">Portal de Transparencia Presupuestaria</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+
+    <script>
+        // Función para inicializar la pestaña de filtros
+        function initFilterTab() {
+            const filterContainer = document.getElementById('floatingFilters');
+            const filterBtn = document.getElementById('filterTabBtn');
+
+            if (filterContainer && filterBtn) {
+                filterBtn.addEventListener('click', function() {
+                    if (filterContainer.classList.contains('collapsed')) {
+                        filterContainer.classList.remove('collapsed');
+                        filterContainer.classList.add('active');
+                    } else {
+                        filterContainer.classList.remove('active');
+                        filterContainer.classList.add('collapsed');
+                    }
+                });
+            }
+        }
+
+        // Ejecutar inicialización cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            initFilterTab(); // Iniciar Filtro
+
+            // Mapa Leaflet
+            var map = L.map('map').setView([19.0414, -98.2063], 9);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Cargar KML
+            var runLayer = omnivore.kml('../models/Mapas/LIMITECOMPLE.kml')
+                .on('ready', function() {
+                    map.fitBounds(runLayer.getBounds());
+                    runLayer.eachLayer(function(layer) {
+                        var contenido = "<b>" + (layer.feature.properties.name || "Obra") + "</b><br>" +
+                                        (layer.feature.properties.description || "Sin descripción");
+                        layer.bindPopup(contenido);
+                    });
+                })
+                .on('error', function() {
+                    console.log("No se encontró el archivo KML. Mostrando marcadores de ejemplo.");
+                    L.marker([19.0414, -98.2063]).addTo(map).bindPopup("<b>Rehabilitación Calle 5 de Mayo</b><br>Avance: 80%");
+                    L.marker([18.46, -97.39]).addTo(map).bindPopup("<b>Hospital General Tehuacán</b><br>Avance: 45%");
+                })
+                .addTo(map);
+        });
+    </script>
+</body>
+</html>

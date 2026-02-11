@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entidades Federativas - Transparencia Presupuestaria Puebla</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    
+    <style>
+        /* --- ESTILOS ESPECÍFICOS ENTIDADES FEDERATIVAS --- */
+        .page-header {
+            background: linear-gradient(135deg, var(--guinda-1), var(--verde-3)), url('../banner_estados.jpg'); /* Asegúrate de tener la imagen */
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: multiply;
+            color: var(--blanco);
+            padding: 100px 0 60px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: 40px;
+            border-bottom: 5px solid var(--dorado-8);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0px var(--verde-3);
+        }
+
+        /* Menú de Subtemas (Tarjetas Superiores) */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+            margin-top: -80px; /* Efecto flotante */
+            position: relative;
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .topic-card {
+            background: var(--blanco);
+            padding: 25px 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid var(--dorado-8);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--guinda-1);
+            background: var(--guinda-1);
+        }
+
+        .topic-card:hover .topic-icon,
+        .topic-card:hover .topic-title {
+            color: var(--blanco);
+        }
+
+        .topic-icon {
+            font-size: 2.5rem;
+            color: var(--guinda-1);
+            margin-bottom: 15px;
+            transition: color 0.3s;
+        }
+
+        .topic-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--verde-3);
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        /* Secciones de Contenido */
+        .content-block {
+            background: var(--blanco);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border-left: 5px solid var(--verde-3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .chart-placeholder {
+            background: var(--crema-4);
+            height: 400px;
+            width: 100%;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: var(--gris-2);
+            border: 2px dashed var(--dorado-8);
+        }
+
+        .kpi-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .kpi-box {
+            text-align: center;
+            background: rgba(219, 198, 179, 0.3); /* Crema transparente */
+            padding: 20px;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--guinda-1);
+            display: block;
+        }
+
+        .kpi-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--verde-3);
+        }
+
+        /* Preloader Styles */
+        .preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--crema-4);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999; transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .preloader.hidden { opacity: 0; visibility: hidden; }
+        .loader-img {
+            width: 150px; height: auto; object-fit: contain;
+            animation: latido 2s infinite ease-in-out;
+        }
+        @keyframes latido {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="preloader" id="preloader">
+        <img src="../models/images/semo.png" alt="Cargando..." class="loader-img">
+    </div>
+
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="top-left">
+                <a href="../Portal.html" class="top-link"><i class="fas fa-landmark"></i> Gobierno de Puebla</a>
+            </div>
+            <div class="top-right">
+                <a href="#"><i class="fas fa-file-alt"></i> Trámites</a>
+                <a href="#"><i class="fas fa-search"></i> Buscar</a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <div class="container nav-content">
+            <a href="../Portal.html" class="brand-link">
+            <div class="brand-area">
+                <!-- Logo oficial de Puebla  -->
+                <img src="../models/images/image.png" alt="Gobierno de Puebla" class="logo-img">
+                <div class="vertical-divider"></div>
+                <div class="site-title">
+                    <span class="title-bold">TRANSPARENCIA</span>
+                    <span class="title-light">PRESUPUESTARIA</span>
+                    <span class="title-sub">Gobierno del Estado de Puebla</span>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <!-- Ciclo Presupuestario -->
+                <a href="../Presupuestacion/Ciclo-Presupuestario.html" class="nav-link">
+                    <i class="fas fa-sync-alt"></i> CICLO PRESUPUESTARIO
+                </a>
+                
+                <!-- Planeación -->
+                <a href="../Presupuestacion/Planeacion.html" class="nav-link">
+                    <i class="fas fa-chart-line"></i> PLANEACIÓN
+                </a>
+                
+                <!-- Menú Ingreso con dropdown -->
+                <div class="dropdown">
+                    <a href="#ingreso" class="nav-link dropdown-toggle">
+                        <i class="fas fa-arrow-down"></i> INGRESO
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="../Presupuestacion/Ingresos-Federales.html" class="dropdown-item">
+                            <i class="fas fa-landmark"></i> Ingresos Federales
+                        </a>
+                        <a href="../Presupuestacion/Recaudacion-Local.html" class="dropdown-item">
+                            <i class="fas fa-map-marker-alt"></i> Recaudación Local
+                        </a>
+                    </div>
+                </div>
+                <!-- Menú Gasto con dropdown -->
+                <div class="dropdown">
+                    <a href="#gasto" class="nav-link dropdown-toggle">
+                        <i class="fas fa-arrow-up"></i> GASTO
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="../Presupuestacion/Programas.html" class="dropdown-item">
+                            <i class="fas fa-clipboard-list"></i> Programas
+                        </a>
+                        <a href="../Presupuestacion/Obra-Publica-Abierta.html" class="dropdown-item">
+                            <i class="fas fa-hard-hat"></i> Obra Pública Abierta
+                        </a>
+                        <a href="../Presupuestacion/Entidades-Federativas.html" class="dropdown-item">
+                            <i class="fas fa-university"></i> Entidades Federativas
+                        </a>
+                        <a href="../Presupuestacion/Ramo-23.html" class="dropdown-item">
+                            <i class="fas fa-chart-pie"></i> Ramo 23
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Evaluación -->
+                <a href="../Presupuestacion/Sistema-Evaluacion-Desempeno.html" class="nav-link">
+                    <i class="fas fa-chart-bar"></i> EVALUACIÓN
+                </a>
+                
+                <a href="../Presupuestacion/Datos-Abiertos.html" class="nav-link">
+                <i class="fas fa-database"></i> DATOS
+                    </a>
+                
+                <!-- Capacitación -->
+                <a href="../Presupuestacion/Capacitacion.html" class="nav-link">
+                <i class="fas fa-graduation-cap"></i> CAPACITACIÓN
+                </a>
+                
+                <button class="search-icon-btn"><i class="fas fa-search"></i></button>
+            </div>
+
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>Entidades Federativas</h1>
+            <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto; padding-bottom: 40px;">
+                En esta sección podrás conocer el monto de las transferencias que los estados reciben por parte del Gobierno Federal, los proyectos que se llevan a cabo con estos recursos y la calidad con la que los gobiernos locales reportan cómo los gastan.
+                Conocerás el avance de los gobiernos subnacionales en la implementación del Presupuesto basado en Resultados y del Sistema de Evaluación del Desempeño (PbR-SED), así como las estadísticas sobre la deuda de estados y municipios. También encontrarás bases de datos abiertos.
+            </p>
+        </div>
+    </header>
+
+    <div class="container" style="margin-bottom: 80px;">
+        
+        <div class="topics-grid">
+            <div class="topic-card">
+                <i class="fas fa-hand-holding-usd topic-icon"></i>
+                <h3 class="topic-title">Montos Transferidos</h3>
+            </div>
+            <div class="topic-card">
+                <i class="fas fa-search-dollar topic-icon"></i>
+                <h3 class="topic-title">Seguimiento a Recursos</h3>
+            </div>
+            <div class="topic-card">
+                <i class="fas fa-file-invoice-dollar topic-icon"></i>
+                <h3 class="topic-title">Reporte ICI</h3>
+            </div>
+            <div class="topic-card">
+                <i class="fas fa-tasks topic-icon"></i>
+                <h3 class="topic-title">Diagnóstico PbR-SED</h3>
+            </div>
+            <div class="topic-card">
+                <i class="fas fa-balance-scale topic-icon"></i>
+                <h3 class="topic-title">Deuda Pública</h3>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <h2 class="section-title">Transferencias Federales a Estados</h2>
+            <p class="section-subtitle" style="text-align: left; margin-bottom: 30px;">
+                Recursos transferidos a través de Aportaciones (Ramo 33), Participaciones (Ramo 28) y Convenios.
+            </p>
+            
+            <div class="kpi-row">
+                <div class="kpi-box">
+                    <span class="kpi-value">$1,250 MM</span>
+                    <span class="kpi-label">Total Transferido 2025</span>
+                </div>
+                <div class="kpi-box">
+                    <span class="kpi-value">32</span>
+                    <span class="kpi-label">Entidades Beneficiadas</span>
+                </div>
+                <div class="kpi-box">
+                    <span class="kpi-value">98.5%</span>
+                    <span class="kpi-label">Porcentaje Pagado</span>
+                </div>
+            </div>
+
+            <div class="chart-placeholder">
+                <i class="fas fa-chart-column" style="font-size: 4rem; color: var(--dorado-8); margin-bottom: 20px;"></i>
+                <h3>Gráfico Interactivo de Transferencias</h3>
+                <p>Aquí se visualizaría el desglose por estado (Ramo 28 vs Ramo 33)</p>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <h2 class="section-title">Índice de Calidad en la Información (ICI)</h2>
+            <p style="margin-bottom: 20px;">
+                Medición de la calidad de los reportes que los gobiernos locales entregan a la SHCP sobre el ejercicio del gasto federalizado.
+            </p>
+            <div class="chart-placeholder">
+                <i class="fas fa-map-marked-alt" style="font-size: 4rem; color: var(--dorado-8); margin-bottom: 20px;"></i>
+                <h3>Mapa de Calor ICI</h3>
+                <p>Ranking nacional de calidad en el reporte del gasto.</p>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="#" class="btn-download">Descargar Reporte Completo (PDF)</a>
+            </div>
+        </div>
+
+    </div>
+
+     <footer class="footer-section">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo-placeholder">
+                        <img src="image.png" alt="Gobierno de Puebla" class="footer-logo-img">
+                    </div>
+                    <div class="footer-titles">
+                        <h4>TRANSPARENCIA PRESUPUESTARIA</h4>
+                        <p>Gobierno del Estado de Puebla</p>
+                    </div>
+                </div>
+                
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h5>Transparencia</h5>
+                        <ul>
+                            <li><a href="#">Portal de Transparencia</a></li>
+                            <li><a href="#">Información Pública</a></li>
+                            <li><a href="#">Protección de Datos</a></li>
+                            <li><a href="#">Avisos de Privacidad</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h5>Recursos</h5>
+                        <ul>
+                            <li><a href="#">Documentos Oficiales</a></li>
+                            <li><a href="#">Leyes y Reglamentos</a></li>
+                            <li><a href="#">Estadísticas</a></li>
+                            <li><a href="#">API Documentación</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h5>Contacto</h5>
+                        <ul>
+                            <li><i class="fas fa-phone"></i> (222) 123 4567</li>
+                            <li><i class="fas fa-envelope"></i> transparencia@puebla.gob.mx</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Puebla, México</li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h5>Síguenos</h5>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Gobierno del Estado de Puebla. Todos los derechos reservados.</p>
+                <p class="footer-version">Portal de Transparencia Presupuestaria | Versión 2.0</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
