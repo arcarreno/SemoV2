@@ -119,14 +119,32 @@ iframe {
     color: var(--crema-4);
 }
 
-/* --- NAVEGACIÓN PRINCIPAL COMPLETA --- */
+/* --- NAVEGACIÓN PRINCIPAL --- */
 .main-nav {
     background: var(--blanco);
     box-shadow: 0 2px 15px var(--sombra);
-    position: sticky;
-    top: 0;
+    position: relative;
     z-index: 1000;
     border-bottom: 3px solid var(--guinda-1);
+}
+
+.main-nav.navbar-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
 }
 
 .nav-content {
@@ -1388,5 +1406,428 @@ iframe {
 
     .carousel-btn {
         display: none;
+    }
+}
+
+/* ============================================
+   MODO NOCHE (DARK MODE)
+   ============================================ */
+
+/* Botón toggle día/noche */
+.dark-mode-toggle {
+    background: none;
+    border: 2px solid var(--dorado-8);
+    color: var(--guinda-1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    margin-left: 8px;
+    position: relative;
+    flex-shrink: 0;
+    order: 10;
+    /* Siempre al final del flex container */
+}
+
+/* En móvil, empujar hamburger a la derecha pegado al toggle */
+@media (max-width: 992px) {
+    .navbar-toggler {
+        margin-left: auto;
+        margin-right: 5px;
+    }
+}
+
+.dark-mode-toggle:hover {
+    background: var(--guinda-1);
+    color: var(--blanco);
+    border-color: var(--guinda-1);
+    transform: rotate(20deg) scale(1.1);
+}
+
+.dark-mode-toggle .fa-sun {
+    display: none;
+}
+
+.dark-mode-toggle .fa-moon {
+    display: inline-block;
+}
+
+body.dark-mode .dark-mode-toggle .fa-sun {
+    display: inline-block;
+}
+
+body.dark-mode .dark-mode-toggle .fa-moon {
+    display: none;
+}
+
+/* Transición suave global */
+body,
+body .main-nav,
+body .dropdown-menu,
+body .page-card,
+body .indicator-card,
+body .quick-access-card,
+body .search-container,
+body .main-search-input,
+body .footer-section,
+body .tag,
+body .nav-link,
+body .dropdown-item {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* --- OVERRIDE DE VARIABLES EN DARK MODE --- */
+body.dark-mode {
+    background-color: #111111;
+    color: #e0e0e0;
+}
+
+/* Top bar — se mantiene guinda, sutil ajuste */
+body.dark-mode .top-bar {
+    background: #1a0a10;
+    border-bottom-color: rgba(125, 36, 71, 0.3);
+}
+
+/* Navbar principal */
+body.dark-mode .main-nav {
+    background: #1a1a1a;
+    border-bottom-color: var(--guinda-1);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .title-bold {
+    color: #d4a0b5;
+}
+
+body.dark-mode .title-light {
+    color: #8ca8a0;
+}
+
+body.dark-mode .title-sub {
+    color: #999;
+}
+
+body.dark-mode .nav-link {
+    color: #ccc !important;
+}
+
+body.dark-mode .nav-link:hover {
+    background: rgba(125, 36, 71, 0.2);
+    color: #d4a0b5 !important;
+}
+
+body.dark-mode .dropdown-menu {
+    background: #222222;
+    border-top-color: var(--guinda-1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .dropdown-item {
+    color: #ccc;
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .dropdown-item:hover {
+    background: rgba(125, 36, 71, 0.2);
+    color: #d4a0b5;
+}
+
+body.dark-mode .dropdown-item i {
+    color: #d4a0b5;
+}
+
+/* Toggle button en dark mode */
+body.dark-mode .dark-mode-toggle {
+    color: #f4c542;
+    border-color: rgba(244, 197, 66, 0.4);
+}
+
+body.dark-mode .dark-mode-toggle:hover {
+    background: rgba(244, 197, 66, 0.15);
+    border-color: #f4c542;
+    color: #f4c542;
+}
+
+/* Barra de búsqueda */
+body.dark-mode .main-search-section {
+    background: #1a1a1a;
+    border-bottom-color: rgba(125, 36, 71, 0.2);
+}
+
+body.dark-mode .search-container {
+    background: #252525;
+    border-color: rgba(125, 36, 71, 0.3);
+}
+
+body.dark-mode .search-container:focus-within {
+    border-color: var(--guinda-1);
+    box-shadow: 0 8px 30px rgba(125, 36, 71, 0.3);
+}
+
+body.dark-mode .search-icon {
+    color: #d4a0b5;
+}
+
+body.dark-mode .main-search-input {
+    background: transparent;
+    color: #e0e0e0;
+}
+
+body.dark-mode .main-search-input::placeholder {
+    color: #777;
+}
+
+body.dark-mode .tag {
+    background: #252525;
+    color: #ccc;
+    border-color: rgba(125, 36, 71, 0.3);
+}
+
+body.dark-mode .tag:hover {
+    background: var(--guinda-1);
+    color: #fff;
+    border-color: var(--guinda-1);
+}
+
+body.dark-mode .search-tags span {
+    color: #999;
+}
+
+/* Sección de indicadores */
+body.dark-mode .indicators-section {
+    background: #151515;
+}
+
+body.dark-mode .section-title {
+    color: #d4a0b5;
+}
+
+body.dark-mode .section-subtitle {
+    color: #999;
+}
+
+body.dark-mode .indicator-card {
+    background: #222222;
+    border-color: rgba(125, 36, 71, 0.2);
+}
+
+body.dark-mode .indicator-card:hover {
+    border-color: var(--guinda-1);
+    box-shadow: 0 10px 30px rgba(125, 36, 71, 0.2);
+}
+
+body.dark-mode .indicator-icon {
+    color: #d4a0b5;
+}
+
+body.dark-mode .indicator-value {
+    color: #8ca8a0;
+}
+
+body.dark-mode .indicator-label {
+    color: #d4a0b5;
+}
+
+body.dark-mode .indicator-sub {
+    color: #888;
+}
+
+/* Grid de páginas */
+body.dark-mode .pages-section {
+    background: #111111;
+}
+
+body.dark-mode .page-card {
+    background: #222222;
+    border-color: rgba(125, 36, 71, 0.2);
+    color: #ccc;
+}
+
+body.dark-mode .page-card h3 {
+    color: #d4a0b5;
+}
+
+body.dark-mode .page-card p {
+    color: #aaa;
+}
+
+body.dark-mode .page-icon {
+    background: rgba(125, 36, 71, 0.15);
+    color: #d4a0b5;
+}
+
+/* Quick access */
+body.dark-mode .quick-access-section {
+    background: #151515;
+}
+
+body.dark-mode .quick-access-card {
+    background: #222222;
+    border-color: rgba(125, 36, 71, 0.2);
+    color: #ccc;
+}
+
+body.dark-mode .quick-access-card:hover {
+    border-color: var(--guinda-1);
+    box-shadow: 0 10px 30px rgba(125, 36, 71, 0.2);
+}
+
+body.dark-mode .quick-access-icon {
+    background: rgba(125, 36, 71, 0.15);
+    color: #d4a0b5;
+}
+
+body.dark-mode .quick-access-content h4 {
+    color: #d4a0b5;
+}
+
+body.dark-mode .quick-access-content p {
+    color: #999;
+}
+
+body.dark-mode .quick-access-arrow {
+    color: #d4a0b5;
+}
+
+/* Footer */
+body.dark-mode .footer-section {
+    background: #0d0d0d;
+}
+
+/* Mobile menu */
+body.dark-mode .mobile-menu-container {
+    background: #1a0a10;
+}
+
+/* Hamburger */
+body.dark-mode .navbar-toggler .fa-bars {
+    color: #d4a0b5 !important;
+}
+
+/* --- DARK MODE PARA SUBPÁGINAS (inline styles override) --- */
+
+/* Page headers — se mantienen con guinda, no cambian */
+
+/* Cards genéricas dentro de subpáginas */
+body.dark-mode .normativity-card,
+body.dark-mode .resource-card,
+body.dark-mode .process-card,
+body.dark-mode .legal-card {
+    background: #222222;
+    border-color: rgba(125, 36, 71, 0.2);
+}
+
+body.dark-mode .process-card:hover {
+    background: var(--guinda-1);
+}
+
+/* Tablas */
+body.dark-mode .custom-table {
+    background: #222222;
+}
+
+body.dark-mode .custom-table td {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+    color: #ccc;
+}
+
+body.dark-mode .custom-table tr:hover {
+    background: rgba(125, 36, 71, 0.1);
+}
+
+/* Featured box — se mantiene con verde/guinda */
+
+/* Containers genéricos */
+body.dark-mode .container {
+    color: #e0e0e0;
+}
+
+/* Textos que heredan color */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+    color: #e0e0e0;
+}
+
+body.dark-mode p {
+    color: #ccc;
+}
+
+/* Preloader — se mantiene con guinda */
+
+/* Botones outline */
+body.dark-mode .btn-outline {
+    color: #d4a0b5;
+    border-color: #d4a0b5;
+}
+
+body.dark-mode .btn-outline:hover {
+    background: var(--guinda-1);
+    color: #fff;
+}
+
+/* Links */
+body.dark-mode a {
+    color: #d4a0b5;
+}
+
+body.dark-mode a:hover {
+    color: #e8c0d0;
+}
+
+/* Scroll bar dark */
+body.dark-mode::-webkit-scrollbar {
+    width: 8px;
+}
+
+body.dark-mode::-webkit-scrollbar-track {
+    background: #111;
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+    background: var(--guinda-1);
+    border-radius: 4px;
+}
+
+/* Bootstrap overrides en dark mode */
+body.dark-mode .text-muted {
+    color: #999 !important;
+}
+
+body.dark-mode .bg-white,
+body.dark-mode .bg-light {
+    background-color: #1a1a1a !important;
+}
+
+body.dark-mode .shadow,
+body.dark-mode .shadow-sm {
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode .border {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Mobile navbar en dark mode */
+@media (max-width: 1199.98px) {
+    body.dark-mode .navbar-collapse {
+        background-color: #1a0a10;
+    }
+}
+
+/* Toggle responsive */
+@media (max-width: 480px) {
+    .dark-mode-toggle {
+        width: 35px;
+        height: 35px;
+        font-size: 15px;
     }
 }

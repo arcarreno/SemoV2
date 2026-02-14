@@ -396,8 +396,6 @@ function initPageCards() {
             this.style.transform = 'translateY(0)';
             this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.05)';
         });
-
-        // NO interceptamos el click - dejamos que el <a href="..."> funcione naturalmente
     });
 }
 
@@ -407,27 +405,6 @@ function initPageLoader() {
     const quickAccessCards = document.querySelectorAll('.quick-access-card');
     const dropdownItems = document.querySelectorAll('.dropdown-item');
     const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
-
-    // Función para simular carga de página
-    function simulatePageLoad(pageId) {
-        // Mostrar loader
-        pageLoader.classList.add('active');
-        document.body.style.overflow = 'hidden';
-
-        // Simular carga de 2 segundos
-        setTimeout(() => {
-            // Ocultar loader
-            pageLoader.classList.remove('active');
-            document.body.style.overflow = 'auto';
-
-            // En un entorno real, aquí cargarías la página
-            if (pagesData[pageId]) {
-                alert(`Redirigiendo a: ${pagesData[pageId].title}\n\n${pagesData[pageId].description}\n\nEn un entorno real, esto cargaría la página correspondiente.`);
-            } else {
-                alert(`Redirigiendo a página...\n\nEn un entorno real, esto cargaría la página correspondiente.`);
-            }
-        }, 2000);
-    }
 
     // Event listeners para tarjetas de acceso rápido
     quickAccessCards.forEach(card => {
@@ -443,7 +420,6 @@ function initPageLoader() {
         item.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
 
-            // --- CORRECCIÓN IMPORTANTE ---
             // Si el enlace es una página real (no empieza con #), dejamos que el navegador la abra
             if (href && !href.startsWith('#')) {
                 return; // Se detiene el script aquí y deja que el enlace funcione normal
@@ -622,18 +598,63 @@ function initAnimations() {
         observer.observe(card);
     });
 
-    // Sticky nav con sombra
-    window.addEventListener('scroll', () => {
-        const nav = document.querySelector('.main-nav');
-        if (window.scrollY > 100) {
-            nav.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
-        } else {
-            nav.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.08)';
-        }
-    });
 }
 
+// ============================================
+// NAVBAR STICKY CON JAVASCRIPT
+// ============================================
+document.addEventListener('DOMContentLoaded', function () {
+    const nav = document.querySelector('.main-nav');
+    if (nav) {
+        let navOffsetTop = nav.offsetTop;
+        let spacer = null;
 
+        function handleStickyNav() {
+            if (window.scrollY >= navOffsetTop) {
+                if (!nav.classList.contains('navbar-fixed')) {
+                    spacer = document.createElement('div');
+                    spacer.style.height = nav.offsetHeight + 'px';
+                    spacer.id = 'navbar-spacer';
+                    nav.parentNode.insertBefore(spacer, nav);
+                    nav.classList.add('navbar-fixed');
+                }
+            } else {
+                if (nav.classList.contains('navbar-fixed')) {
+                    nav.classList.remove('navbar-fixed');
+                    const existingSpacer = document.getElementById('navbar-spacer');
+                    if (existingSpacer) existingSpacer.remove();
+                    spacer = null;
+                }
+            }
+        }
+
+        window.addEventListener('scroll', handleStickyNav);
+        window.addEventListener('resize', () => {
+            if (!nav.classList.contains('navbar-fixed')) {
+                navOffsetTop = nav.offsetTop;
+            }
+        });
+    }
+});
 
 // Console log inicial
 console.log('Portal de Transparencia Presupuestaria - Puebla');
+
+// ============================================
+// MODO DÍA / NOCH
+// ============================================
+
+(function () {
+    const savedTheme = localStorage.getItem('darkMode');
+    if (savedTheme === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+})();
+
+// Función global de toggle
+function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle('dark-mode');
+    const isDark = body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isDark);
+}
