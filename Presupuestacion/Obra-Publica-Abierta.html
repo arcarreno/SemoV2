@@ -451,15 +451,85 @@
         </div>
     </nav>
 
-    <header class="page-header">
-        <div class="container">
-            <h1>Obra Pública Abierta</h1>
-            <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto;">
-                En esta sección encontrarás información sobre los recursos que las instituciones del Gobierno Federal
-                destinan a proyectos de inversión.
-            </p>
+    <section class="hero-carousel">
+        <div class="carousel-container">
+            <div class="carousel-slide active">
+                <div class="slide-overlay"></div>
+                <img src="../models/images/banner_home.png" alt="Obra Pública Abierta" class="slide-image">
+                <div class="slide-content">
+                    <h1 class="slide-title">Obra Pública Abierta</h1>
+                    <p class="slide-text">
+                        En esta sección encontrarás información sobre los recursos que las instituciones del Gobierno
+                        Federal
+                        destinan a proyectos de inversión.
+                    </p>
+                </div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-overlay"></div>
+                <img src="../models/images/pc-gobierno-abierto.png" alt="Transparencia Presupuestaria"
+                    class="slide-image">
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-overlay"></div>
+                <img src="../models/images/Cuida tus datos_ banner 1600x533.png" alt="Cuida tus datos"
+                    class="slide-image">
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-overlay"></div>
+                <img src="../models/images/LICITACIONES.png" alt="Licitaciones" class="slide-image">
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-overlay"></div>
+                <img src="../models/images/banner 1 informe 1600 x 533 02.png" alt="Informe" class="slide-image">
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-overlay"></div>
+                <img src="../models/images/pc-mujeres-imparables.png" alt="Mujeres Imparables" class="slide-image">
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-overlay"></div>
+                <img src="../models/images/Sin corrupcin_PC.png" alt="Sin Corrupción" class="slide-image">
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-overlay"></div>
+                <img src="../models/images/pc-estacionamientorotativo.png" alt="Estacionamiento Rotativo"
+                    class="slide-image">
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-overlay"></div>
+                <img src="../models/images/PLAN-MPAL-DE-DESARROLLO.png" alt="Plan Municipal de Desarrollo"
+                    class="slide-image">
+            </div>
+
+            <button class="carousel-btn carousel-prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-btn carousel-next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <div class="carousel-indicators">
+                <span class="indicator active" data-slide="0"></span>
+                <span class="indicator" data-slide="1"></span>
+                <span class="indicator" data-slide="2"></span>
+                <span class="indicator" data-slide="3"></span>
+                <span class="indicator" data-slide="4"></span>
+                <span class="indicator" data-slide="5"></span>
+                <span class="indicator" data-slide="6"></span>
+                <span class="indicator" data-slide="7"></span>
+                <span class="indicator" data-slide="8"></span>
+            </div>
         </div>
-    </header>
+    </section>
 
     <div class="container">
         <div class="featured-box">
@@ -485,7 +555,13 @@
             <div class="col-md-3">
                 <div class="stat-card">
                     <span class="stat-number" id="statObras"><i class="fas fa-spinner fa-spin"></i></span>
-                    <span class="stat-label">Total de Obras</span>
+                    <span class="stat-label">Total de Acciones</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <span class="stat-number" id="statContratos"><i class="fas fa-spinner fa-spin"></i></span>
+                    <span class="stat-label">Número de Contratos</span>
                 </div>
             </div>
             <div class="col-md-3">
@@ -499,24 +575,19 @@
                     style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;"
                     onclick="toggleJuntaDropdown()">
                     <span class="stat-number" id="statJuntas"><i class="fas fa-spinner fa-spin"></i></span>
-                    <span class="stat-label">Juntas Auxiliares <i class="fas fa-chevron-down"
+                    <span class="stat-label">Juntas Auxiliares y Zona Metropolitana <i class="fas fa-chevron-down"
                             style="font-size: 0.7rem;"></i></span>
                     <span class="stat-label" id="statJuntaSelected"
                         style="color: var(--guinda-1); font-weight: 600; display: none;"></span>
                 </div>
-                <!-- Dropdown de Juntas Auxiliares -->
                 <div id="juntaDropdown"
                     style="display:none; position:absolute; top:100%; left:50%; transform:translateX(-50%); z-index:1000; width:280px; max-height:400px; overflow-y:auto; background:#fff; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.15); margin-top:8px; padding:8px 0;">
                     <div id="juntaDropdownList"></div>
                 </div>
             </div>
         </div>
-
-        <!-- ====== SECCIÓN DE GRÁFICOS INTERACTIVOS ====== -->
         <h2 class="section-title">Análisis de Obra Pública</h2>
         <p class="section-subtitle">Visualización interactiva de inversiones, rubros y avance de obras públicas.</p>
-
-        <!-- Filtro por año -->
         <div class="d-flex justify-content-center mb-4">
             <div class="btn-group" role="group" aria-label="Filtrar por año">
                 <button type="button" class="btn btn-outline-secondary active" id="btnTodos"
@@ -552,13 +623,13 @@
                     </div>
                 </div>
             </div>
-            <!-- Gráfico 3: Avance Físico por Rubro -->
+            <!-- Gráfico 3: Avance Físico por Contratista -->
             <div class="col-12">
                 <div class="stat-card" style="height: auto; padding: 25px;">
                     <h5 style="color: var(--guinda-1); font-weight: 700; margin-bottom: 20px;">
-                        <i class="fas fa-tasks me-2"></i>Avance Físico Promedio por Rubro
+                        <i class="fas fa-tasks me-2"></i>Avance Físico Promedio por Contratista
                     </h5>
-                    <div style="position: relative; height: 350px;">
+                    <div style="position: relative; height: 600px;">
                         <canvas id="chartAvance"></canvas>
                     </div>
                 </div>
@@ -943,6 +1014,7 @@
                         var avanceStr = row['AVANCE FÍSICO'] || '0';
                         var junta = row['JUNTAS AUXILIARES'] ? String(row['JUNTAS AUXILIARES']).trim() : '';
                         var cantidadObras = row['CANTIDAD DE OBRAS'] ? String(row['CANTIDAD DE OBRAS']).trim() : '';
+                        var contratista = row['CONTRATISTA'] ? String(row['CONTRATISTA']).trim() : '';
 
                         if (year && rubro) {
                             obraData.push({
@@ -951,7 +1023,8 @@
                                 monto_total: parseFloat(montoStr) || 0,
                                 avance_fisico: parseFloat(avanceStr) || 0,
                                 junta: junta ? junta.toUpperCase() : 'SIN ASIGNAR',
-                                cantidad_obras: parseInt(cantidadObras) || 1
+                                cantidad_obras: parseInt(cantidadObras) || 1,
+                                contratista: contratista ? contratista.toUpperCase() : 'SIN ASIGNAR'
                             });
                         }
                     });
@@ -978,18 +1051,21 @@
             var totalObras = 0;
             var totalInversion = 0;
             var juntasSet = {};
+            var contratistasSet = {};
 
             filteredData.forEach(function (d) {
                 totalObras += d.cantidad_obras;
                 totalInversion += d.monto_total;
                 juntasSet[d.junta] = true;
+                contratistasSet[d.contratista] = true;
             });
 
-            var totalJuntas = Object.keys(juntasSet).length;
+            var totalContratos = Object.keys(contratistasSet).length;
 
             document.getElementById('statObras').textContent = totalObras.toLocaleString('es-MX');
             document.getElementById('statInversion').textContent = formatMoneyFull(totalInversion);
-            document.getElementById('statJuntas').textContent = 18;
+            document.getElementById('statContratos').textContent = totalContratos.toLocaleString('es-MX');
+            document.getElementById('statJuntas').textContent = 17;
         }
 
         // ============ DROPDOWN DE JUNTAS ============
@@ -1115,14 +1191,25 @@
                 juntas[d.junta] += d.monto_total;
             });
 
+            // Agrupar por contratista para el gráfico de avance
+            var contratistas = {};
+            filteredData.forEach(function (d) {
+                if (!contratistas[d.contratista]) contratistas[d.contratista] = { avance_sum: 0, count: 0 };
+                contratistas[d.contratista].avance_sum += d.avance_fisico;
+                contratistas[d.contratista].count++;
+            });
+
             var rubroKeys = Object.keys(rubros).sort(function (a, b) { return rubros[b].total - rubros[a].total; });
             var rubroTotals = rubroKeys.map(function (k) { return rubros[k].total; });
 
             var juntaKeys = Object.keys(juntas).sort(function (a, b) { return juntas[b] - juntas[a]; });
             var juntaTotals = juntaKeys.map(function (k) { return juntas[k]; });
 
-            var avanceValues = rubroKeys.map(function (k) {
-                return (rubros[k].avance_sum / rubros[k].count * 100).toFixed(1);
+            var contratistaKeys = Object.keys(contratistas).sort(function (a, b) {
+                return (contratistas[b].avance_sum / contratistas[b].count) - (contratistas[a].avance_sum / contratistas[a].count);
+            });
+            var avanceValues = contratistaKeys.map(function (k) {
+                return (contratistas[k].avance_sum / contratistas[k].count * 100).toFixed(1);
             });
 
             if (chartRubro) chartRubro.destroy();
@@ -1186,11 +1273,11 @@
                 }
             });
 
-            // Avance Físico Promedio
+            // Avance Físico Promedio por Contratista
             chartAvance = new Chart(document.getElementById('chartAvance'), {
                 type: 'bar',
                 data: {
-                    labels: rubroKeys,
+                    labels: contratistaKeys,
                     datasets: [{
                         label: 'Avance Físico (%)',
                         data: avanceValues,

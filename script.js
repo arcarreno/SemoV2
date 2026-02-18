@@ -196,6 +196,29 @@ function initCarousel() {
     if (carousel) {
         carousel.addEventListener('mouseenter', stopAutoPlay);
         carousel.addEventListener('mouseleave', startAutoPlay);
+
+        // Soporte para swipe en móvil y tablet
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        carousel.addEventListener('touchstart', function (e) {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoPlay();
+        }, { passive: true });
+
+        carousel.addEventListener('touchend', function (e) {
+            touchEndX = e.changedTouches[0].screenX;
+            const swipeDistance = touchStartX - touchEndX;
+
+            if (Math.abs(swipeDistance) > 50) {
+                if (swipeDistance > 0) {
+                    nextSlide(); // Swipe izquierda = siguiente
+                } else {
+                    prevSlide(); // Swipe derecha = anterior
+                }
+            }
+            startAutoPlay();
+        }, { passive: true });
     }
 
     // Iniciar autoplay
