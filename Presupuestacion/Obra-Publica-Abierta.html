@@ -59,7 +59,7 @@
             }
         }
 
-        /* --- ESTILOS GENERALES Y HEADER --- */
+        /* ESTILOS GENERALES Y HEADER */
         .page-header {
             background-color: var(--guinda-1);
             background-image: url('../models/images/pc-gobierno-abierto.png');
@@ -83,7 +83,7 @@
             text-shadow: 2px 2px 0px var(--verde-3);
         }
 
-        /* --- RESPONSIVE PAGE HEADER --- */
+        /*  RESPONSIVE PAGE HEADER  */
         @media (max-width: 768px) {
             .page-header {
                 padding: 60px 0 35px;
@@ -155,7 +155,7 @@
             width: 100%;
         }
 
-        /* --- FILTRO FLOTANTE --- */
+        /*  FILTRO FLOTANTE */
         .floating-filters {
             position: fixed;
             top: 200px;
@@ -275,7 +275,7 @@
             transform: translateY(-2px);
         }
 
-        /* --- ESTADÍSTICAS --- */
+        /*  ESTADÍSTICAS  */
         .stat-card {
             justify-content: center;
             text-align: center;
@@ -377,6 +377,145 @@
             margin-bottom: 10px;
             color: var(--crema-4);
         }
+
+        .download-panel {
+            display: none;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--guinda-1) 0%, #5a122e 100%);
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            padding: 25px 30px;
+            z-index: 1000;
+            min-width: 350px;
+            margin-top: 15px;
+            border: 2px solid var(--dorado-8);
+        }
+
+        .download-panel.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .download-panel h4 {
+            color: var(--crema-4);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .download-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .download-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+
+        .download-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .file-icon.kml {
+            background: linear-gradient(135deg, #4285f4, #34a853);
+        }
+
+        .file-icon.excel {
+            background: linear-gradient(135deg, #217346, #2e7d32);
+        }
+
+        .file-name {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .file-size {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.75rem;
+        }
+
+        .btn-download-file {
+            background: var(--dorado-8);
+            color: var(--guinda-1);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-download-file:hover {
+            background: var(--crema-4);
+            transform: scale(1.05);
+        }
+
+        .download-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .modal .nav-pills .nav-link {
+            color: var(--guinda-1);
+            background-color: transparent;
+            border: 1px solid var(--guinda-1);
+            margin: 0 3px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .modal .nav-pills .nav-link.active {
+            background-color: var(--guinda-1);
+            color: white;
+        }
+
+        .modal .table th {
+            vertical-align: middle;
+        }
+
+        .modal .table-hover tbody tr:hover {
+            background-color: rgba(125, 36, 71, 0.05);
+        }
     </style>
 </head>
 
@@ -394,9 +533,7 @@
                 </a>
             </div>
             <div class="top-right d-flex gap-3">
-                <a href="#" class="text-white text-decoration-none small"><i class="fas fa-file-alt"></i> Trámites</a>
                 <a href="#" class="text-white text-decoration-none small"><i class="fas fa-building"></i> Gobierno</a>
-                <a href="#" class="text-white text-decoration-none small"><i class="fas fa-search"></i> Buscar</a>
             </div>
         </div>
     </div>
@@ -455,38 +592,62 @@
         <div class="carousel-container">
             <div class="carousel-slide active">
                 <div class="slide-overlay"></div>
-                <img src="../models/images/pc-gobierno-abierto.png" alt="Gobierno Abierto" class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="../models/images/pc-gobierno-abierto-movil.png">
+                    <img src="../models/images/pc-gobierno-abierto.png" alt="Gobierno Abierto" class="slide-image">
+                </picture>
             </div>
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
-                <img src="../models/images/Cuida tus datos_ banner 1600x533.png" alt="Cuida tus datos"
-                    class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="../models/images/cuida-tus-datos-movil.png">
+                    <img src="../models/images/Cuida tus datos_ banner 1600x533.png" alt="Cuida tus datos"
+                        class="slide-image">
+                </picture>
             </div>
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
-                <img src="../models/images/LICITACIONES.png" alt="Licitaciones" class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="../models/images/licitaciones-movil.png">
+                    <img src="../models/images/LICITACIONES.png" alt="Licitaciones" class="slide-image">
+                </picture>
             </div>
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
-                <img src="../models/images/banner 1 informe 1600 x 533 02.png" alt="Informe" class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="../models/images/informe-movil.png">
+                    <img src="../models/images/banner 1 informe 1600 x 533 02.png" alt="Informe" class="slide-image">
+                </picture>
             </div>
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
-                <img src="../models/images/pc-mujeres-imparables.png" alt="Mujeres Imparables" class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="../models/images/mujeres-imparables-movil.png">
+                    <img src="../models/images/pc-mujeres-imparables.png" alt="Mujeres Imparables" class="slide-image">
+                </picture>
             </div>
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
-                <img src="../models/images/Sin corrupcin_PC.png" alt="Sin Corrupción" class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="../models/images/sin-corrupcion-movil.png">
+                    <img src="../models/images/Sin corrupcin_PC.png" alt="Sin Corrupción" class="slide-image">
+                </picture>
             </div>
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
-                <img src="../models/images/pc-estacionamientorotativo.png" alt="Estacionamiento Rotativo"
-                    class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="../models/images/estacionamiento-movil.png">
+                    <img src="../models/images/pc-estacionamientorotativo.png" alt="Estacionamiento Rotativo"
+                        class="slide-image">
+                </picture>
             </div>
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
-                <img src="../models/images/PLAN-MPAL-DE-DESARROLLO.png" alt="Plan Municipal de Desarrollo"
-                    class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="../models/images/plan-municipal-movil.png">
+                    <img src="../models/images/PLAN-MPAL-DE-DESARROLLO.png" alt="Plan Municipal de Desarrollo"
+                        class="slide-image">
+                </picture>
             </div>
 
             <button class="carousel-btn carousel-prev">
@@ -579,7 +740,7 @@
         </div>
 
         <div class="row g-4 mb-5">
-            <!-- Gráfico 1: Inversión por Rubro -->
+            <!-- Grafico- Inversión por Rubro -->
             <div class="col-lg-7">
                 <div class="stat-card" style="height: auto; padding: 25px;">
                     <h5 style="color: var(--guinda-1); font-weight: 700; margin-bottom: 20px;">
@@ -590,7 +751,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Gráfico 2: Distribución por Junta Auxiliar -->
+            <!-- Grafico- Distribución por Junta Auxiliar -->
             <div class="col-lg-5">
                 <div class="stat-card" style="height: auto; padding: 25px;">
                     <h5 style="color: var(--guinda-1); font-weight: 700; margin-bottom: 20px;">
@@ -601,7 +762,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Gráfico 3: Contratos Realizados -->
+            <!-- Gráfico : Contratos Realizados -->
             <div class="col-12">
                 <div class="stat-card" style="height: auto; padding: 25px;">
                     <h5 style="color: var(--guinda-1); font-weight: 700; margin-bottom: 20px;">
@@ -609,6 +770,117 @@
                     </h5>
                     <div style="position: relative; height: 600px;">
                         <canvas id="chartAvance"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- Gráfico : Avance Físico -->
+            <div class="col-12">
+                <div class="stat-card" style="height: auto; padding: 25px;">
+                    <h5 style="color: var(--guinda-1); font-weight: 700; margin-bottom: 20px;">
+                        Avance Físico
+                    </h5>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="text-center mb-3">
+                                <h6 style="color: var(--verde-3); font-weight: 600;">Concluidos</h6>
+                            </div>
+                            <div style="position: relative; height: 300px; cursor: pointer;"
+                                onclick="showDetalleAvance('concluidos')">
+                                <canvas id="chartAvanceFisicoConcluidos"></canvas>
+                            </div>
+                            <div class="text-center mt-2">
+                                <small class="text-muted"><i class="fas fa-info-circle me-1"></i>Click para ver
+                                    detalle</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center mb-3">
+                                <h6 style="color: var(--dorado-8); font-weight: 600;">En Proceso</h6>
+                            </div>
+                            <div style="position: relative; height: 300px; cursor: pointer;"
+                                onclick="showDetalleAvance('proceso')">
+                                <canvas id="chartAvanceFisicoProceso"></canvas>
+                            </div>
+                            <div class="text-center mt-2">
+                                <small class="text-muted"><i class="fas fa-info-circle me-1"></i>Click para ver
+                                    detalle</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Panel Detalle Avance Físico -->
+        <div id="detalleAvancePanel" class="modal" tabindex="-1"
+            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000;">
+            <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 900px;">
+                <div class="modal-content" style="border-radius: 15px; overflow: hidden;">
+                    <div class="modal-header"
+                        style="background: linear-gradient(135deg, var(--guinda-1) 0%, #5a122e 100%); color: white; border: none;">
+                        <h5 class="modal-title" id="detalleAvanceTitulo">Avance Físico</h5>
+                        <button type="button" class="btn-close btn-close-white" onclick="closeDetalleAvance()"></button>
+                    </div>
+                    <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                        <div class="mb-3">
+                            <ul class="nav nav-pills" id="detalleAvanceTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="detalle2024-tab" data-bs-toggle="pill"
+                                        data-bs-target="#detalle2024" type="button">2024</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="detalle2025-tab" data-bs-toggle="pill"
+                                        data-bs-target="#detalle2025" type="button">2025</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="detalle2026-tab" data-bs-toggle="pill"
+                                        data-bs-target="#detalle2026" type="button">2026</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="detalleAvanceContent">
+                            <div class="tab-pane fade show active" id="detalle2024" role="tabpanel">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover" id="tablaDetalle2024">
+                                        <thead style="background: var(--guinda-1); color: white;">
+                                            <tr>
+                                                <th>Rubro</th>
+                                                <th>Monto Total</th>
+                                                <th>Junta Auxiliar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="detalle2025" role="tabpanel">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover" id="tablaDetalle2025">
+                                        <thead style="background: var(--guinda-1); color: white;">
+                                            <tr>
+                                                <th>Rubro</th>
+                                                <th>Monto Total</th>
+                                                <th>Junta Auxiliar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="detalle2026" role="tabpanel">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover" id="tablaDetalle2026">
+                                        <thead style="background: var(--guinda-1); color: white;">
+                                            <tr>
+                                                <th>Rubro</th>
+                                                <th>Monto Total</th>
+                                                <th>Junta Auxiliar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -636,7 +908,7 @@
             </li>
         </ul>
 
-        <!-- ====== BUSCADOR FLOTANTE (visible en todos los mapas) ====== -->
+        <!-- ====== BUSCADOR FLOTANTE ====== -->
         <div style="position: relative;">
             <div id="floatingFilters" class="floating-filters collapsed">
                 <button id="filterTabBtn" class="filter-tab" title="Abrir Filtros">
@@ -704,10 +976,10 @@
                 </div>
             </div>
 
-            <!-- ====== CONTENIDO POR PESTAÑA ====== -->
+            <!--  CONTENIDO POR PESTAÑA  -->
             <div class="tab-content" id="obrasTabContent">
 
-                <!-- ====== TAB 2024 ====== -->
+                <!-- TAB 2024-->
                 <div class="tab-pane fade show active" id="obra2024" role="tabpanel" aria-labelledby="obra2024-tab">
                     <div class="map-container">
                         <div id="map2024"></div>
@@ -728,7 +1000,7 @@
                     </div>
                 </div>
 
-                <!-- ====== TAB 2025 ====== -->
+                <!--  TAB 2025 -->
                 <div class="tab-pane fade" id="obra2025" role="tabpanel" aria-labelledby="obra2025-tab">
                     <div class="map-container">
                         <div id="map2025"></div>
@@ -748,7 +1020,7 @@
                     </div>
                 </div>
 
-                <!-- ====== TAB 2026 ====== -->
+                <!--  TAB 2026 -->
                 <div class="tab-pane fade" id="obra2026" role="tabpanel" aria-labelledby="obra2026-tab">
                     <div class="map-container">
                         <div id="map2026"></div>
@@ -771,13 +1043,54 @@
             </div>
             <!-- FIN tab-content -->
         </div>
-        <!-- FIN wrapper position:relative -->
 
         <div style="text-align: center; margin-top: 40px;">
-            <a href="#" class="btn btn-lg"
-                style="background-color: var(--verde-3); color: white; padding: 15px 30px; border-radius: 50px;">
-                <i class="fas fa-download me-2"></i> Descargar Base de Datos (KML/CSV)
-            </a>
+            <div class="download-wrapper">
+                <button id="btnDownloadDb" class="btn btn-lg"
+                    style="background-color: var(--verde-3); color: white; padding: 15px 30px; border-radius: 50px; border: none; cursor: pointer;"
+                    onclick="toggleDownloadPanel()">
+                    <i class="fas fa-download me-2"></i> Descargar Base de Datos (KML/CSV)
+                </button>
+                <div id="downloadPanel" class="download-panel">
+                    <h4><i class="fas fa-folder-open me-2"></i>Archivos Disponibles</h4>
+                    <div class="download-item">
+                        <div class="file-info">
+                            <div class="file-icon kml"><i class="fas fa-map-marked-alt"></i></div>
+                            <div>
+                                <div class="file-name">Mapa 2025 (KMZ)</div>
+                                <div class="file-size">Archivo de Google Earth</div>
+                            </div>
+                        </div>
+                        <a href="../models/Mapas/Mapa2025.kmz" download class="btn-download-file">
+                            <i class="fas fa-download me-1"></i> Descargar
+                        </a>
+                    </div>
+                    <div class="download-item">
+                        <div class="file-info">
+                            <div class="file-icon kml"><i class="fas fa-map-marked-alt"></i></div>
+                            <div>
+                                <div class="file-name">Mapa 2024 (KMZ)</div>
+                                <div class="file-size">Archivo de Google Earth</div>
+                            </div>
+                        </div>
+                        <a href="../models/Mapas/Mapa2024.kmz" download class="btn-download-file">
+                            <i class="fas fa-download me-1"></i> Descargar
+                        </a>
+                    </div>
+                    <div class="download-item">
+                        <div class="file-info">
+                            <div class="file-icon excel"><i class="fas fa-file-excel"></i></div>
+                            <div>
+                                <div class="file-name">Reporte de Obras y Servicios</div>
+                                <div class="file-size">Excel (.xlsx)</div>
+                            </div>
+                        </div>
+                        <a href="../Data/REPORTE DE OBRAS y SERVICIOS 311225.xlsx" download class="btn-download-file">
+                            <i class="fas fa-download me-1"></i> Descargar
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -850,7 +1163,7 @@
 
             <div class="border-top border-secondary mt-4 pt-4 text-center small opacity-50">
                 <p class="mb-1">&copy; 2026 Gobierno del Estado de Puebla. Todos los derechos reservados.</p>
-                <p>Portal de Transparencia Presupuestaria | Versión 2.0</p>
+                <p>Portal de Transparencia Presupuestaria | Pagina hecha 100% en Puebla</p>
             </div>
         </div>
     </footer>
@@ -944,7 +1257,6 @@
                     initMap(mapId);
 
                     // Leaflet necesita invalidateSize después de que el tab sea visible
-                    // Múltiples intentos para asegurar que funcione
                     setTimeout(function () {
                         if (maps[mapId]) {
                             maps[mapId].invalidateSize();
@@ -960,14 +1272,16 @@
         });
     </script>
 
-    <!-- ====== SCRIPT DINÁMICO - XLSX + GRÁFICOS + FILTROS ====== -->
+    <!--SCRIPT DINÁMICO - XLSX + GRÁFICOS + FILTROS -->
     <script>
-        // ============ VARIABLES GLOBALES ============
+        //  VARIABLES GLOBALES 
         var obraData = [];
         var contratosData = [];
         var currentYearFilter = 'todos';
         var currentJuntaFilter = null;
         var chartRubro, chartJunta, chartAvance;
+        var chartAvanceFisicoConcluidos, chartAvanceFisicoProceso;
+        var detalleAvanceTipo = 'concluidos';
 
         var chartColors = [
             '#7D2447', '#A63156', '#D4A574', '#C8956A', '#5A1A33',
@@ -976,7 +1290,7 @@
             '#D2691E', '#8B4513', '#A0522D'
         ];
 
-        // ============ FORMATEO ============
+        //  FORMATEO 
         function formatMoney(n) {
             if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
             if (n >= 1e3) return '$' + (n / 1e3).toFixed(0) + 'K';
@@ -987,9 +1301,9 @@
             return '$' + n.toLocaleString('es-MX', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
         }
 
-        // ============ HELPER: buscar header por patrón ============
+        //  HELPER: buscar header por patrón 
         function findHeader(headers, pattern) {
-            // Busca un header que contenga el patrón (sin acentos)
+            // Busca un header que contenga el patrón 
             var normalize = function (s) {
                 return s.normalize ? s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase() : s.toUpperCase();
             };
@@ -1010,7 +1324,7 @@
             return key && row[key] !== undefined ? row[key] : '';
         }
 
-        // ============ LECTURA CSV CON PAPAPARSE ============
+        //  LECTURA CSV CON PAPAPARSE 
         function loadCSVData() {
             var p1 = fetch('../Data/OBRA_PUBLICA_MODIFICADA_FINAL.csv')
                 .then(function (response) { return response.arrayBuffer(); })
@@ -1118,13 +1432,13 @@
                 });
         }
 
-        // ============ INICIALIZAR UI ============
+        //  INICIALIZAR UI 
         function initializeUI() {
             populateJuntaDropdown();
             applyFilters();
         }
 
-        // ============ STAT CARDS ============
+        //  STAT CARDS 
         function updateStatCards(filteredData) {
             var totalObras = 0;
             var totalInversion = 0;
@@ -1148,7 +1462,7 @@
             document.getElementById('statJuntas').textContent = 17;
         }
 
-        // ============ DROPDOWN DE JUNTAS ============
+        // DROPDOWN DE JUNTAS 
         var juntaDropdownOpen = false;
 
         function populateJuntaDropdown() {
@@ -1255,7 +1569,7 @@
             applyFilters();
         }
 
-        // ============ GRÁFICOS ============
+        //  GRÁFICOS
         function buildCharts(filteredData) {
             var rubros = {};
             filteredData.forEach(function (d) {
@@ -1353,7 +1667,7 @@
                 }
             });
 
-            // Contratos Realizados (desde OBRA_PUBLICA_CONTRATOS.csv)
+            // Contratos Realizados 
             chartAvance = new Chart(document.getElementById('chartAvance'), {
                 type: 'bar',
                 data: {
@@ -1381,9 +1695,178 @@
                     }
                 }
             });
+
+            // Gráficos de Avance Físico
+            buildAvanceFisicoCharts(filteredData);
         }
 
-        // ============ FILTRO DEL MAPA (KMZ) ============
+        function buildAvanceFisicoCharts(filteredData) {
+            // Separar datos por estado de avance físico
+            var concluidos = filteredData.filter(function (d) { return d.avance_fisico >= 1; });
+            var proceso = filteredData.filter(function (d) { return d.avance_fisico < 1 && d.avance_fisico > 0; });
+
+            // Agrupar por año para concluidos
+            var concluidos2024 = concluidos.filter(function (d) { return d.year === '2024'; });
+            var concluidos2025 = concluidos.filter(function (d) { return d.year === '2025'; });
+            var concluidos2026 = concluidos.filter(function (d) { return d.year === '2026'; });
+
+            // Agrupar por año para en proceso
+            var proceso2024 = proceso.filter(function (d) { return d.year === '2024'; });
+            var proceso2025 = proceso.filter(function (d) { return d.year === '2025'; });
+            var proceso2026 = proceso.filter(function (d) { return d.year === '2026'; });
+
+            // Datos para gáfico de concluidos
+            var concluidosData = {
+                '2024': concluidos2024.length,
+                '2025': concluidos2025.length,
+                '2026': concluidos2026.length
+            };
+
+            // Datos para gráico de en proceso
+            var procesoData = {
+                '2024': proceso2024.length,
+                '2025': proceso2025.length,
+                '2026': proceso2026.length
+            };
+
+            if (chartAvanceFisicoConcluidos) chartAvanceFisicoConcluidos.destroy();
+            if (chartAvanceFisicoProceso) chartAvanceFisicoProceso.destroy();
+
+            // Gráfico de Concluidos
+            chartAvanceFisicoConcluidos = new Chart(document.getElementById('chartAvanceFisicoConcluidos'), {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(concluidosData),
+                    datasets: [{
+                        label: 'Obras Concluidas',
+                        data: Object.values(concluidosData),
+                        backgroundColor: ['#2E7D32', '#388E3C', '#43A047'],
+                        borderColor: ['#2E7D32', '#388E3C', '#43A047'],
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function (ctx) {
+                                    return ctx.raw + ' obra(s) concluida(s)';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { stepSize: 1, font: { size: 11 } },
+                            grid: { color: 'rgba(0,0,0,0.05)' }
+                        },
+                        x: {
+                            ticks: { font: { size: 11 } },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de En Proceso
+            chartAvanceFisicoProceso = new Chart(document.getElementById('chartAvanceFisicoProceso'), {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(procesoData),
+                    datasets: [{
+                        label: 'Obras en Proceso',
+                        data: Object.values(procesoData),
+                        backgroundColor: ['#F57C00', '#FB8C00', '#FF9800'],
+                        borderColor: ['#F57C00', '#FB8C00', '#FF9800'],
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function (ctx) {
+                                    return ctx.raw + ' obra(s) en proceso';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { stepSize: 1, font: { size: 11 } },
+                            grid: { color: 'rgba(0,0,0,0.05)' }
+                        },
+                        x: {
+                            ticks: { font: { size: 11 } },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        //  PANEL DETALLE AVANCE FÍSICO 
+        function showDetalleAvance(tipo) {
+            detalleAvanceTipo = tipo;
+            var titulo = tipo === 'concluidos' ? 'Concluidos' : 'En Proceso';
+            document.getElementById('detalleAvanceTitulo').innerHTML = '<i class="fas fa-traffic-cone me-2"></i>Avance Físico - ' + titulo;
+
+            populateDetalleTable('2024', tipo);
+            populateDetalleTable('2025', tipo);
+            populateDetalleTable('2026', tipo);
+
+            document.getElementById('detalleAvancePanel').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function populateDetalleTable(year, tipo) {
+            var filtered = obraData.filter(function (d) {
+                if (tipo === 'concluidos') {
+                    return d.year === year && d.avance_fisico >= 1;
+                } else {
+                    return d.year === year && d.avance_fisico < 1 && d.avance_fisico > 0;
+                }
+            });
+
+            var tbody = document.querySelector('#tablaDetalle' + year + ' tbody');
+            tbody.innerHTML = '';
+
+            if (filtered.length === 0) {
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td colspan="3" class="text-center text-muted">No hay registros para este año</td>';
+                tbody.appendChild(tr);
+                return;
+            }
+
+            filtered.forEach(function (d) {
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>' + d.rubro + '</td><td>' + formatMoneyFull(d.monto_total) + '</td><td>' + d.junta + '</td>';
+                tbody.appendChild(tr);
+            });
+        }
+
+        function closeDetalleAvance() {
+            document.getElementById('detalleAvancePanel').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('detalleAvancePanel').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeDetalleAvance();
+            }
+        });
+
+        //  FILTRO DEL MAPA (KMZ) 
         function getActiveMapId() {
             var activeTab = document.querySelector('#obrasTabContent .tab-pane.active');
             if (activeTab) return activeTab.id.replace('obra', 'map');
@@ -1441,9 +1924,38 @@
             console.log('Filtro mapa: ' + shown + ' visibles, ' + hidden + ' ocultos');
         }
 
-        // ============ INICIALIZACIÓN ============
+        // INICIALIZACIÓN 
         document.addEventListener('DOMContentLoaded', function () {
             loadCSVData();
+        });
+
+        // PANEL DE DESCARGAS
+        var downloadPanelOpen = false;
+
+        function toggleDownloadPanel() {
+            downloadPanelOpen = !downloadPanelOpen;
+            var panel = document.getElementById('downloadPanel');
+            var btn = document.getElementById('btnDownloadDb');
+
+            if (downloadPanelOpen) {
+                panel.classList.add('show');
+                btn.style.backgroundColor = '#5a3a2a';
+            } else {
+                panel.classList.remove('show');
+                btn.style.backgroundColor = 'var(--verde-3)';
+            }
+        }
+
+        document.addEventListener('click', function (e) {
+            var wrapper = document.querySelector('.download-wrapper');
+            var panel = document.getElementById('downloadPanel');
+            var btn = document.getElementById('btnDownloadDb');
+
+            if (wrapper && panel && !wrapper.contains(e.target) && downloadPanelOpen) {
+                downloadPanelOpen = false;
+                panel.classList.remove('show');
+                btn.style.backgroundColor = 'var(--verde-3)';
+            }
         });
     </script>
 </body>

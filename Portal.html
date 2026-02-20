@@ -278,9 +278,7 @@
                 </a>
             </div>
             <div class="top-right d-flex gap-3">
-                <a href="#" class="text-white text-decoration-none small"><i class="fas fa-file-alt"></i> Trámites</a>
                 <a href="#" class="text-white text-decoration-none small"><i class="fas fa-building"></i> Gobierno</a>
-                <a href="#" class="text-white text-decoration-none small"><i class="fas fa-search"></i> Buscar</a>
             </div>
         </div>
     </div>
@@ -330,37 +328,62 @@
         <div class="carousel-container">
             <div class="carousel-slide active">
                 <div class="slide-overlay"></div>
-                <img src="models/images/pc-gobierno-abierto.png" alt="Gobierno Abierto" class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="models/images/pc-gobierno-abierto-movil.png">
+                    <img src="models/images/pc-gobierno-abierto.png" alt="Gobierno Abierto" class="slide-image">
+                </picture>
             </div>
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
-                <img src="models/images/Cuida tus datos_ banner 1600x533.png" alt="Cuida tus datos" class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="models/images/cuida-tus-datos-movil.png">
+                    <img src="models/images/Cuida tus datos_ banner 1600x533.png" alt="Cuida tus datos"
+                        class="slide-image">
+                </picture>
             </div>
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
-                <img src="models/images/LICITACIONES.png" alt="Licitaciones" class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="models/images/licitaciones-movil.png">
+                    <img src="models/images/LICITACIONES.png" alt="Licitaciones" class="slide-image">
+                </picture>
             </div>
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
-                <img src="models/images/banner 1 informe 1600 x 533 02.png" alt="Informe" class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="models/images/informe-movil.png">
+                    <img src="models/images/banner 1 informe 1600 x 533 02.png" alt="Informe" class="slide-image">
+                </picture>
             </div>
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
-                <img src="models/images/pc-mujeres-imparables.png" alt="Mujeres Imparables" class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="models/images/mujeres-imparables-movil.png">
+                    <img src="models/images/pc-mujeres-imparables.png" alt="Mujeres Imparables" class="slide-image">
+                </picture>
             </div>
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
-                <img src="models/images/Sin corrupcin_PC.png" alt="Sin Corrupción" class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="models/images/sin-corrupcion-movil.png">
+                    <img src="models/images/Sin corrupcin_PC.png" alt="Sin Corrupción" class="slide-image">
+                </picture>
             </div>
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
-                <img src="models/images/pc-estacionamientorotativo.png" alt="Estacionamiento Rotativo"
-                    class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="models/images/estacionamiento-movil.png">
+                    <img src="models/images/pc-estacionamientorotativo.png" alt="Estacionamiento Rotativo"
+                        class="slide-image">
+                </picture>
             </div>
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
-                <img src="models/images/PLAN-MPAL-DE-DESARROLLO.png" alt="Plan Municipal de Desarrollo"
-                    class="slide-image">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="models/images/plan-municipal-movil.png">
+                    <img src="models/images/PLAN-MPAL-DE-DESARROLLO.png" alt="Plan Municipal de Desarrollo"
+                        class="slide-image">
+                </picture>
             </div>
 
             <button class="carousel-btn carousel-prev">
@@ -431,47 +454,6 @@
     </section>
 
     <!-- Sección de Perfiles Mejorada -->
-    <section class="profiles-section">
-        <div class="container">
-            <h2 class="section-title">¿No sabes por dónde comenzar?</h2>
-            <p class="section-subtitle">Utiliza las búsquedas recomendadas por perfil.</p>
-
-            <div class="profiles-grid">
-                <div class="profile-card" data-profile="estudiante">
-                    <div class="profile-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>Estudiante</h3>
-                    <p>Aprende conceptos básicos del presupuesto</p>
-                </div>
-                <div class="profile-card" data-profile="servidor">
-                    <div class="profile-icon">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h3>Servidor Público</h3>
-                    <p>Herramientas de gestión y evaluación</p>
-                </div>
-                <div class="profile-card" data-profile="investigador">
-                    <div class="profile-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3>Investigador</h3>
-                    <p>Datos históricos y metodologías</p>
-                </div>
-                <div class="profile-card" data-profile="desarrollador">
-                    <div class="profile-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Especialista en Datos</h3>
-                    <p>API y diccionario de datos</p>
-                </div>
-            </div>
-
-            <div class="faq-panel" id="faqPanel">
-                <div class="faq-content" id="faqContent"></div>
-            </div>
-        </div>
-    </section>
 
     <footer class="footer-section bg-secondary text-white py-5" style="background-color: var(--verde-3) !important;">
         <div class="container">
@@ -537,7 +519,7 @@
 
             <div class="border-top border-secondary mt-4 pt-4 text-center small opacity-50">
                 <p class="mb-1">&copy; 2026 Gobierno del Estado de Puebla. Todos los derechos reservados.</p>
-                <p>Portal de Transparencia Presupuestaria | Versión 2.0</p>
+                <p>Portal de Transparencia Presupuestaria | Pagina hecha 100% en Puebla</p>
             </div>
         </div>
     </footer>

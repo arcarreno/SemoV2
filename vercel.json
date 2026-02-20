@@ -1,8 +1,0 @@
-{
-    "rewrites": [
-        {
-            "source": "/",
-            "destination": "/Portal_Transparencia_Presupuestaria_V2/Semovinfra/Portal.html"
-        }
-    ]
-}

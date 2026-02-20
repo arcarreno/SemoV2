@@ -1,5 +1,4 @@
 :root {
-    /* --- 8 COLORES EXACTOS --- */
     --guinda-1: #7d2447;
     /* Principal (PANTONE 216 C) */
     --gris-2: #636569;
@@ -19,7 +18,7 @@
     --dorado-8: #C2BA98;
     /* Decorativo (PANTONE 4525 U) */
 
-    /* --- ASIGNACIÓN DE USO --- */
+    /*  ASIGNACIÓN DE USO  */
     --bg-pagina: var(--crema-4);
     --texto-principal: var(--gris-2);
     --texto-titulo: var(--guinda-1);
@@ -32,14 +31,14 @@
 
 
 
-/* --- RESET Y BASE --- */
+/*  RESET Y BASE  */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* --- PREVENIR SCROLL HORIZONTAL EN MÓVIL --- */
+/*  PREVENIR SCROLL HORIZONTAL EN MóVIL */
 html {
     scroll-behavior: smooth;
     max-width: 100%;
@@ -49,7 +48,6 @@ html {
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: var(--crema-4);
-    /* Usando var en lugar de gris-claro antiguo */
     color: var(--gris-2);
     line-height: 1.6;
     max-width: 100%;
@@ -76,7 +74,7 @@ iframe {
     padding: 0 20px;
 }
 
-/* --- BARRA SUPERIOR OFICIAL --- */
+/*  BARRA SUPERIOR OFICIAL  */
 .top-bar {
     background: var(--guinda-1);
     color: var(--blanco);
@@ -119,7 +117,7 @@ iframe {
     color: var(--crema-4);
 }
 
-/* --- NAVEGACIÓN PRINCIPAL --- */
+/*  NAVEGACIÓN PRINCIPAL */
 .main-nav {
     background: var(--blanco);
     box-shadow: 0 2px 15px var(--sombra);
@@ -231,7 +229,7 @@ iframe {
     color: var(--guinda-1);
 }
 
-/* --- DROPDOWN MENUS --- */
+/*  DROPDOWN MENUS  */
 .dropdown {
     position: relative;
 }
@@ -332,7 +330,7 @@ iframe {
     border-radius: 6px;
 }
 
-/* --- CARRUSEL ANIMADO --- */
+/*  CARRUSEL ANIMADO  */
 .hero-carousel {
     position: relative;
     height: 600px;
@@ -474,10 +472,10 @@ iframe {
     background: var(--crema-4);
 }
 
-/* --- CARRUSEL RESPONSIVE: TABLET --- */
+/*  CARRUSEL RESPONSIVE: TABLET  */
 @media (max-width: 768px) {
     .hero-carousel {
-        height: 280px;
+        height: 350px;
         max-width: 100%;
         width: 100%;
         overflow: hidden;
@@ -539,10 +537,10 @@ iframe {
     }
 }
 
-/* --- CARRUSEL RESPONSIVE: MÓVIL --- */
+/*  CARRUSEL RESPONSIVE: MÓVIL */
 @media (max-width: 480px) {
     .hero-carousel {
-        height: 200px;
+        height: 280px;
     }
 
     .slide-image {
@@ -596,7 +594,7 @@ iframe {
     }
 }
 
-/* --- BARRA DE BÚSQUEDA --- */
+/*  BARRA DE BÚSQUEDA  */
 .main-search-section {
     padding: 40px 0;
     background: var(--blanco);
@@ -763,7 +761,7 @@ iframe {
     opacity: 0.8;
 }
 
-/* --- SECCIÓN DE 10 CONTENEDORES --- */
+/*  SECCIÓN DE 10 CONTENEDORES QUE EN LA ACTUALIDAD YA NO EXISTEN, SOLO EXISTE EL DE OBRA-PUBLICA-ABIERTA  */
 .pages-section {
     padding: 80px 0;
     background: var(--crema-4);
@@ -774,7 +772,6 @@ iframe {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* ESTO ES LA CLAVE: Centra todo */
     gap: 30px;
     margin-top: 40px;
     padding: 0 20px;
@@ -864,7 +861,7 @@ iframe {
     opacity: 0.9;
 }
 
-/* --- SECCIÓN DE PERFILES --- */
+/* --- SECCIÓN DE PERFILES --- YA NO EXISTE PERO PODRIA QUEDARSE PARA FUTURAS ACTUALIZACIONES*/
 .profiles-section {
     text-align: center;
     padding: 80px 0;
@@ -918,7 +915,7 @@ iframe {
     opacity: 0.9;
 }
 
-/* --- FAQ PANEL --- */
+/*  FAQ PANEL  */
 .faq-panel {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
@@ -1032,7 +1029,7 @@ iframe {
     transform: translateX(5px);
 }
 
-/* --- FOOTER --- */
+/*  FOOTER */
 .footer-section {
     background: var(--verde-3);
     color: var(--blanco);
@@ -1294,7 +1291,7 @@ iframe {
     }
 }
 
-/* --- RESPONSIVE --- */
+/*  RESPONSIVE  */
 @media (max-width: 1200px) {
     .container {
         padding: 0 30px;
@@ -1512,7 +1509,7 @@ iframe {
     }
 }
 
-/* --- MUY PEQUEÑO (320px) --- */
+/*  MUY PEQUEÑO (320px)  */
 @media (max-width: 360px) {
     .hero-carousel {
         height: 180px;
@@ -1537,7 +1534,7 @@ iframe {
 }
 
 /* ============================================
-   MODO NOCHE (DARK MODE)
+   MODO NOCHE 
    ============================================ */
 
 /* Botón toggle día/noche */
@@ -1558,10 +1555,9 @@ iframe {
     position: relative;
     flex-shrink: 0;
     order: 10;
-    /* Siempre al final del flex container */
+
 }
 
-/* En móvil, empujar hamburger a la derecha pegado al toggle */
 @media (max-width: 992px) {
     .navbar-toggler {
         margin-left: auto;
@@ -1608,13 +1604,12 @@ body .dropdown-item {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* --- OVERRIDE DE VARIABLES EN DARK MODE --- */
 body.dark-mode {
     background-color: #111111;
     color: #e0e0e0;
 }
 
-/* Top bar — se mantiene guinda, sutil ajuste */
+
 body.dark-mode .top-bar {
     background: #1a0a10;
     border-bottom-color: rgba(125, 36, 71, 0.3);
@@ -1836,11 +1831,11 @@ body.dark-mode .navbar-toggler .fa-bars {
     color: #d4a0b5 !important;
 }
 
-/* --- DARK MODE PARA SUBPÁGINAS (inline styles override) --- */
+/* --- DARK MODE PARA SUBPÁGINAS  === */
 
 /* Page headers — se mantienen con guinda, no cambian */
 
-/* Cards genéricas dentro de subpáginas */
+/**/
 body.dark-mode .normativity-card,
 body.dark-mode .resource-card,
 body.dark-mode .process-card,
@@ -1978,7 +1973,7 @@ body.dark-mode .btn-group .btn-outline-secondary.active {
     border-color: var(--guinda-1) !important;
 }
 
-/* --- DARK MODE: Pestañas de mapa (Obra Pública 2024/2025/2026) --- */
+/* --- DARK MODE: Pestañas de mapa  */
 body.dark-mode #obrasTab .nav-link {
     color: #d4a0b5;
     background: transparent;

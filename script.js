@@ -589,7 +589,7 @@ function initAnimations() {
 
 // ============================================
 // NAVBAR STICKY CON JAVASCRIPT
-// ============================================
+
 document.addEventListener('DOMContentLoaded', function () {
     const nav = document.querySelector('.main-nav');
     if (nav) {
@@ -629,7 +629,7 @@ console.log('Portal de Transparencia Presupuestaria - Puebla');
 
 // ============================================
 // MODO DÍA / NOCH
-// ============================================
+
 
 (function () {
     const savedTheme = localStorage.getItem('darkMode');
