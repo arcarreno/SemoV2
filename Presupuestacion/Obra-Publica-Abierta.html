@@ -455,55 +455,34 @@
         <div class="carousel-container">
             <div class="carousel-slide active">
                 <div class="slide-overlay"></div>
-                <img src="../models/images/banner_home.png" alt="Obra Pública Abierta" class="slide-image">
-                <div class="slide-content">
-                    <h1 class="slide-title">Obra Pública Abierta</h1>
-                    <p class="slide-text">
-                        En esta sección encontrarás información sobre los recursos que las instituciones del Gobierno
-                        Federal
-                        destinan a proyectos de inversión.
-                    </p>
-                </div>
+                <img src="../models/images/pc-gobierno-abierto.png" alt="Gobierno Abierto" class="slide-image">
             </div>
-
-            <div class="carousel-slide">
-                <div class="slide-overlay"></div>
-                <img src="../models/images/pc-gobierno-abierto.png" alt="Transparencia Presupuestaria"
-                    class="slide-image">
-            </div>
-
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
                 <img src="../models/images/Cuida tus datos_ banner 1600x533.png" alt="Cuida tus datos"
                     class="slide-image">
             </div>
-
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
                 <img src="../models/images/LICITACIONES.png" alt="Licitaciones" class="slide-image">
             </div>
-
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
                 <img src="../models/images/banner 1 informe 1600 x 533 02.png" alt="Informe" class="slide-image">
             </div>
-
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
                 <img src="../models/images/pc-mujeres-imparables.png" alt="Mujeres Imparables" class="slide-image">
             </div>
-
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
                 <img src="../models/images/Sin corrupcin_PC.png" alt="Sin Corrupción" class="slide-image">
             </div>
-
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
                 <img src="../models/images/pc-estacionamientorotativo.png" alt="Estacionamiento Rotativo"
                     class="slide-image">
             </div>
-
             <div class="carousel-slide">
                 <div class="slide-overlay"></div>
                 <img src="../models/images/PLAN-MPAL-DE-DESARROLLO.png" alt="Plan Municipal de Desarrollo"
@@ -526,7 +505,6 @@
                 <span class="indicator" data-slide="5"></span>
                 <span class="indicator" data-slide="6"></span>
                 <span class="indicator" data-slide="7"></span>
-                <span class="indicator" data-slide="8"></span>
             </div>
         </div>
     </section>
@@ -623,11 +601,11 @@
                     </div>
                 </div>
             </div>
-            <!-- Gráfico 3: Avance Físico por Contratista -->
+            <!-- Gráfico 3: Contratos Realizados -->
             <div class="col-12">
                 <div class="stat-card" style="height: auto; padding: 25px;">
                     <h5 style="color: var(--guinda-1); font-weight: 700; margin-bottom: 20px;">
-                        <i class="fas fa-tasks me-2"></i>Avance Físico Promedio por Contratista
+                        <i class="fas fa-file-contract me-2"></i>Contratos Realizados
                     </h5>
                     <div style="position: relative; height: 600px;">
                         <canvas id="chartAvance"></canvas>
@@ -658,137 +636,142 @@
             </li>
         </ul>
 
-        <!-- ====== CONTENIDO POR PESTAÑA ====== -->
-        <div class="tab-content" id="obrasTabContent">
+        <!-- ====== BUSCADOR FLOTANTE (visible en todos los mapas) ====== -->
+        <div style="position: relative;">
+            <div id="floatingFilters" class="floating-filters collapsed">
+                <button id="filterTabBtn" class="filter-tab" title="Abrir Filtros">
+                    <i class="fas fa-filter"></i>
+                </button>
+                <div class="filter-content">
+                    <div class="filter-header mb-4">
+                        <h4 class="m-0"><i class="fas fa-search-location me-2"></i>Buscador</h4>
+                        <p class="small text-white-50 m-0">Selecciona criterios</p>
+                    </div>
+                    <div class="filter-block mb-3">
+                        <label class="filter-label"><i class="fas fa-map-marker-alt"></i> Junta Auxiliar</label>
+                        <div class="input-wrapper">
+                            <select class="custom-select w-100" id="filterJunta">
+                                <option selected>Todas las juntas auxiliares</option>
+                                <option>San Baltazar Campeche</option>
+                                <option>San Baltazar Tetela</option>
+                                <option>Santa María Guadalupe Tecola</option>
+                                <option>San Felipe Hueyotlipan</option>
+                                <option>San Francisco Totimehuacán</option>
+                                <option>Santo Tomás Chautla</option>
+                                <option>Ignacio Zaragoza</option>
+                                <option>Ignacio Romero Vargas</option>
+                                <option>La Libertad</option>
+                                <option>San Jerónimo Caleras</option>
+                                <option>San Pablo Xochimehuacan</option>
+                                <option>San Sebastián de Aparicio</option>
+                                <option>La Resurrección</option>
+                                <option>Santa María Xonacatepec</option>
+                                <option>San Miguel Canoa</option>
+                                <option>San Pedro Zacachimalpa</option>
+                                <option>San Andrés Azumiatla</option>
+                            </select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+                    <div class="filter-block mb-3">
+                        <label class="filter-label"><i class="fas fa-hard-hat"></i> Sector</label>
+                        <div class="input-wrapper">
+                            <select class="custom-select w-100" id="filterSector">
+                                <option selected>Todos los sectores</option>
+                                <option>Pavimentacion</option>
+                                <option>Rehabilitaciones viales</option>
+                                <option>Obras Hidrosanitarias</option>
+                                <option>Mercados</option>
+                                <option>Infra Educativa</option>
+                                <option>Bacheo</option>
+                                <option>Infra Ciclista</option>
+                            </select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+                    <div class="filter-block mb-4">
+                        <label class="filter-label"><i class="fas fa-tasks"></i> Estatus</label>
+                        <div class="input-wrapper">
+                            <select class="custom-select w-100" id="filterEstatus">
+                                <option selected>Cualquier estatus</option>
+                                <option>En Ejecución</option>
+                                <option>Concluidas</option>
+                            </select>
+                            <i class="fas fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+                    <button class="btn-apply-filter" onclick="applyMapFilter()">VER RESULTADOS</button>
+                </div>
+            </div>
 
-            <!-- ====== TAB 2024 ====== -->
-            <div class="tab-pane fade show active" id="obra2024" role="tabpanel" aria-labelledby="obra2024-tab">
-                <div class="map-container">
-                    <div id="map2024"></div>
+            <!-- ====== CONTENIDO POR PESTAÑA ====== -->
+            <div class="tab-content" id="obrasTabContent">
 
-                    <div id="floatingFilters" class="floating-filters collapsed">
-                        <button id="filterTabBtn" class="filter-tab" title="Abrir Filtros">
-                            <i class="fas fa-filter"></i>
-                        </button>
-                        <div class="filter-content">
-                            <div class="filter-header mb-4">
-                                <h4 class="m-0"><i class="fas fa-search-location me-2"></i>Buscador</h4>
-                                <p class="small text-white-50 m-0">Selecciona criterios</p>
-                            </div>
-                            <div class="filter-block mb-3">
-                                <label class="filter-label"><i class="fas fa-map-marker-alt"></i> Junta Auxiliar</label>
-                                <div class="input-wrapper">
-                                    <select class="custom-select w-100" id="filterJunta">
-                                        <option selected>Todas las juntas auxiliares</option>
-                                        <option>San Baltazar Campeche</option>
-                                        <option>San Baltazar Tetela</option>
-                                        <option>Santa María Guadalupe Tecola</option>
-                                        <option>San Felipe Hueyotlipan</option>
-                                        <option>San Francisco Totimehuacán</option>
-                                        <option>Santo Tomás Chautla</option>
-                                        <option>Ignacio Zaragoza</option>
-                                        <option>Ignacio Romero Vargas</option>
-                                        <option>La Libertad</option>
-                                        <option>San Jerónimo Caleras</option>
-                                        <option>San Pablo Xochimehuacan</option>
-                                        <option>San Sebastián de Aparicio</option>
-                                        <option>La Resurrección</option>
-                                        <option>Santa María Xonacatepec</option>
-                                        <option>San Miguel Canoa</option>
-                                        <option>San Pedro Zacachimalpa</option>
-                                        <option>San Andrés Azumiatla</option>
-                                    </select>
-                                    <i class="fas fa-chevron-down select-arrow"></i>
-                                </div>
-                            </div>
-                            <div class="filter-block mb-3">
-                                <label class="filter-label"><i class="fas fa-hard-hat"></i> Sector</label>
-                                <div class="input-wrapper">
-                                    <select class="custom-select w-100" id="filterSector">
-                                        <option selected>Todos los sectores</option>
-                                        <option>Pavimentacion</option>
-                                        <option>Rehabilitaciones viales</option>
-                                        <option>Obras Hidrosanitarias</option>
-                                        <option>Mercados</option>
-                                        <option>Infra Educativa</option>
-                                        <option>Bacheo</option>
-                                        <option>Infra Ciclista</option>
-                                    </select>
-                                    <i class="fas fa-chevron-down select-arrow"></i>
-                                </div>
-                            </div>
-                            <div class="filter-block mb-4">
-                                <label class="filter-label"><i class="fas fa-tasks"></i> Estatus</label>
-                                <div class="input-wrapper">
-                                    <select class="custom-select w-100" id="filterEstatus">
-                                        <option selected>Cualquier estatus</option>
-                                        <option>En Ejecución</option>
-                                        <option>Concluidas</option>
-                                    </select>
-                                    <i class="fas fa-chevron-down select-arrow"></i>
-                                </div>
-                            </div>
-                            <button class="btn-apply-filter" onclick="applyMapFilter()">VER RESULTADOS</button>
+                <!-- ====== TAB 2024 ====== -->
+                <div class="tab-pane fade show active" id="obra2024" role="tabpanel" aria-labelledby="obra2024-tab">
+                    <div class="map-container">
+                        <div id="map2024"></div>
+                    </div>
+
+                    <div class="featured-box mt-5" style="justify-content: center; align-items: center;">
+                        <div class="featured-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="featured-content" style="flex: 1;">
+                            <h3>NOTA:</h3>
+                            <p style="opacity: 0.9;">
+                                Reporte de obras públicas comprendidas en el periodo del inicio de administración del 15
+                                de
+                                octubre del 2024 al 31 de diciembre del 2024.
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="featured-box mt-5" style="justify-content: center; align-items: center;">
-                    <div class="featured-icon">
-                        <i class="fas fa-info-circle"></i>
+                <!-- ====== TAB 2025 ====== -->
+                <div class="tab-pane fade" id="obra2025" role="tabpanel" aria-labelledby="obra2025-tab">
+                    <div class="map-container">
+                        <div id="map2025"></div>
                     </div>
-                    <div class="featured-content" style="flex: 1;">
-                        <h3>NOTA:</h3>
-                        <p style="opacity: 0.9;">
-                            Reporte de obras públicas comprendidas en el periodo del inicio de administración del 15 de
-                            octubre del 2024 al 31 de diciembre del 2024.
-                        </p>
+
+                    <div class="featured-box mt-5" style="justify-content: center; align-items: center;">
+                        <div class="featured-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="featured-content" style="flex: 1;">
+                            <h3>NOTA:</h3>
+                            <p style="opacity: 0.9;">
+                                Reporte de obras públicas comprendidas en el periodo del 1 de enero del 2025 al 31 de
+                                diciembre del 2025.
+                            </p>
+                        </div>
                     </div>
                 </div>
+
+                <!-- ====== TAB 2026 ====== -->
+                <div class="tab-pane fade" id="obra2026" role="tabpanel" aria-labelledby="obra2026-tab">
+                    <div class="map-container">
+                        <div id="map2026"></div>
+                    </div>
+
+                    <div class="featured-box mt-5" style="justify-content: center; align-items: center;">
+                        <div class="featured-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="featured-content" style="flex: 1;">
+                            <h3>NOTA:</h3>
+                            <p style="opacity: 0.9;">
+                                Reporte de Obras publicas comprendidas en el periodo del 1 de enero del 2026 al 31 de
+                                diciembre del 2026...Aun en proceso.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-
-            <!-- ====== TAB 2025 ====== -->
-            <div class="tab-pane fade" id="obra2025" role="tabpanel" aria-labelledby="obra2025-tab">
-                <div class="map-container">
-                    <div id="map2025"></div>
-                </div>
-
-                <div class="featured-box mt-5" style="justify-content: center; align-items: center;">
-                    <div class="featured-icon">
-                        <i class="fas fa-info-circle"></i>
-                    </div>
-                    <div class="featured-content" style="flex: 1;">
-                        <h3>NOTA:</h3>
-                        <p style="opacity: 0.9;">
-                            Reporte de obras públicas comprendidas en el periodo del 1 de enero del 2025 al 31 de
-                            diciembre del 2025.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ====== TAB 2026 ====== -->
-            <div class="tab-pane fade" id="obra2026" role="tabpanel" aria-labelledby="obra2026-tab">
-                <div class="map-container">
-                    <div id="map2026"></div>
-                </div>
-
-                <div class="featured-box mt-5" style="justify-content: center; align-items: center;">
-                    <div class="featured-icon">
-                        <i class="fas fa-info-circle"></i>
-                    </div>
-                    <div class="featured-content" style="flex: 1;">
-                        <h3>NOTA:</h3>
-                        <p style="opacity: 0.9;">
-                            Reporte de Obras publicas comprendidas en el periodo del 1 de enero del 2026 al 31 de
-                            diciembre del 2026...Aun en proceso.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
+            <!-- FIN tab-content -->
         </div>
-        <!-- FIN tab-content -->
+        <!-- FIN wrapper position:relative -->
 
         <div style="text-align: center; margin-top: 40px;">
             <a href="#" class="btn btn-lg"
@@ -808,7 +791,8 @@
                             style="filter: brightness(0) invert(1); max-width: 180px;">
                     </div>
                     <div class="lh-1">
-                        <h4 class="h6 fw-bold text-crema" style="color: var(--crema-4);">TRANSPARENCIA PRESUPUESTARIA
+                        <h4 class="h6 fw-bold text-crema" style="color: var(--crema-4);">TRANSPARENCIA
+                            PRESUPUESTARIA
                         </h4>
                         <p class="small opacity-75">Gobierno del Estado de Puebla</p>
                     </div>
@@ -821,7 +805,8 @@
                                 Transparencia</a></li>
                         <li class="mb-2"><a href="#" class="text-white text-decoration-none opacity-75">Información
                                 Pública</a></li>
-                        <li class="mb-2"><a href="#" class="text-white text-decoration-none opacity-75">Protección de
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none opacity-75">Protección
+                                de
                                 Datos</a></li>
                         <li class="mb-2"><a href="#" class="text-white text-decoration-none opacity-75">Avisos de
                                 Privacidad</a></li>
@@ -958,11 +943,18 @@
 
                     initMap(mapId);
 
+                    // Leaflet necesita invalidateSize después de que el tab sea visible
+                    // Múltiples intentos para asegurar que funcione
                     setTimeout(function () {
                         if (maps[mapId]) {
                             maps[mapId].invalidateSize();
                         }
-                    }, 200);
+                    }, 300);
+                    setTimeout(function () {
+                        if (maps[mapId]) {
+                            maps[mapId].invalidateSize();
+                        }
+                    }, 800);
                 });
             });
         });
@@ -972,6 +964,7 @@
     <script>
         // ============ VARIABLES GLOBALES ============
         var obraData = [];
+        var contratosData = [];
         var currentYearFilter = 'todos';
         var currentJuntaFilter = null;
         var chartRubro, chartJunta, chartAvance;
@@ -994,11 +987,38 @@
             return '$' + n.toLocaleString('es-MX', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
         }
 
+        // ============ HELPER: buscar header por patrón ============
+        function findHeader(headers, pattern) {
+            // Busca un header que contenga el patrón (sin acentos)
+            var normalize = function (s) {
+                return s.normalize ? s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase() : s.toUpperCase();
+            };
+            var pat = normalize(pattern);
+            for (var i = 0; i < headers.length; i++) {
+                if (normalize(headers[i]).indexOf(pat) !== -1) return headers[i];
+            }
+            // Fallback: limpiar caracteres no-ASCII y comparar
+            var clean = function (s) { return s.replace(/[^A-Z0-9 ]/g, '').trim(); };
+            pat = clean(pattern.toUpperCase());
+            for (var j = 0; j < headers.length; j++) {
+                if (clean(headers[j].toUpperCase()).indexOf(pat) !== -1) return headers[j];
+            }
+            return null;
+        }
+
+        function getVal(row, key) {
+            return key && row[key] !== undefined ? row[key] : '';
+        }
+
         // ============ LECTURA CSV CON PAPAPARSE ============
         function loadCSVData() {
-            fetch('../Data/OBRA_PUBLICA_MODIFICADA_FINAL.csv')
-                .then(function (response) { return response.text(); })
-                .then(function (csvText) {
+            var p1 = fetch('../Data/OBRA_PUBLICA_MODIFICADA_FINAL.csv')
+                .then(function (response) { return response.arrayBuffer(); })
+                .then(function (buffer) {
+                    // Decodificar como latin1 para preservar todos los bytes
+                    var decoder = new TextDecoder('iso-8859-1');
+                    var csvText = decoder.decode(buffer);
+
                     var result = Papa.parse(csvText, {
                         header: true,
                         skipEmptyLines: true,
@@ -1007,14 +1027,28 @@
 
                     obraData = [];
 
+                    // Detectar nombres de columnas reales
+                    var headers = result.meta.fields || [];
+                    console.log('Headers detectados:', headers);
+
+                    var hYear = findHeader(headers, 'ANO') || findHeader(headers, 'AÑO') || findHeader(headers, 'AO');
+                    var hRubro = findHeader(headers, 'RUBRO');
+                    var hMonto = findHeader(headers, 'MONTO TOTAL');
+                    var hAvance = findHeader(headers, 'AVANCE FISICO') || findHeader(headers, 'AVANCE F');
+                    var hJunta = findHeader(headers, 'JUNTAS AUXILIARES');
+                    var hCantidad = findHeader(headers, 'CANTIDAD DE OBRAS');
+                    var hContratista = findHeader(headers, 'CONTRATISTA');
+
+                    console.log('Columnas mapeadas:', { hYear, hRubro, hMonto, hAvance, hJunta, hCantidad, hContratista });
+
                     result.data.forEach(function (row) {
-                        var year = row['AÑO'] ? String(row['AÑO']).trim() : '';
-                        var rubro = row['RUBRO'] ? String(row['RUBRO']).trim() : '';
-                        var montoStr = row['MONTO TOTAL'] || '0';
-                        var avanceStr = row['AVANCE FÍSICO'] || '0';
-                        var junta = row['JUNTAS AUXILIARES'] ? String(row['JUNTAS AUXILIARES']).trim() : '';
-                        var cantidadObras = row['CANTIDAD DE OBRAS'] ? String(row['CANTIDAD DE OBRAS']).trim() : '';
-                        var contratista = row['CONTRATISTA'] ? String(row['CONTRATISTA']).trim() : '';
+                        var year = getVal(row, hYear).toString().trim();
+                        var rubro = getVal(row, hRubro).toString().trim();
+                        var montoStr = getVal(row, hMonto) || '0';
+                        var avanceStr = getVal(row, hAvance) || '0';
+                        var junta = getVal(row, hJunta).toString().trim();
+                        var cantidadObras = getVal(row, hCantidad).toString().trim();
+                        var contratista = getVal(row, hContratista).toString().trim();
 
                         if (year && rubro) {
                             obraData.push({
@@ -1029,11 +1063,55 @@
                         }
                     });
 
-                    console.log('CSV cargado: ' + obraData.length + ' registros');
+                    console.log('CSV obra cargado: ' + obraData.length + ' registros');
+                });
+
+            var p2 = fetch('../Data/OBRA_PUBLICA_CONTRATOS.csv')
+                .then(function (response) { return response.text(); })
+                .then(function (csvText) {
+                    // Eliminar BOM si existe
+                    if (csvText.charCodeAt(0) === 0xFEFF) csvText = csvText.substring(1);
+
+                    var result = Papa.parse(csvText, {
+                        header: true,
+                        skipEmptyLines: true,
+                        dynamicTyping: false
+                    });
+
+                    contratosData = [];
+
+                    var headers2 = result.meta.fields || [];
+                    console.log('Headers contratos:', headers2);
+
+                    var hObra = findHeader(headers2, 'Obra') || headers2[0];
+                    var hNumContratos = findHeader(headers2, 'Numero de contratos') || findHeader(headers2, 'contratos') || headers2[1];
+                    var hYear2 = findHeader(headers2, 'ano') || findHeader(headers2, 'año') || findHeader(headers2, 'ao') || headers2[2];
+
+                    console.log('Columnas contratos mapeadas:', { hObra, hNumContratos, hYear2 });
+
+                    result.data.forEach(function (row) {
+                        var obra = getVal(row, hObra).toString().trim();
+                        var numContratos = parseInt(getVal(row, hNumContratos)) || 0;
+                        var year = getVal(row, hYear2).toString().trim();
+
+                        if (obra && year) {
+                            contratosData.push({
+                                obra: obra.toUpperCase(),
+                                contratos: numContratos,
+                                year: year
+                            });
+                        }
+                    });
+
+                    console.log('CSV contratos cargado: ' + contratosData.length + ' registros');
+                });
+
+            Promise.all([p1, p2])
+                .then(function () {
                     initializeUI();
                 })
                 .catch(function (err) {
-                    console.error('Error cargando CSV:', err);
+                    console.error('Error cargando CSVs:', err);
                     document.getElementById('statObras').textContent = 'Error';
                     document.getElementById('statInversion').textContent = 'Error';
                     document.getElementById('statJuntas').textContent = 'Error';
@@ -1050,17 +1128,19 @@
         function updateStatCards(filteredData) {
             var totalObras = 0;
             var totalInversion = 0;
-            var juntasSet = {};
-            var contratistasSet = {};
 
             filteredData.forEach(function (d) {
                 totalObras += d.cantidad_obras;
                 totalInversion += d.monto_total;
-                juntasSet[d.junta] = true;
-                contratistasSet[d.contratista] = true;
             });
 
-            var totalContratos = Object.keys(contratistasSet).length;
+            // Contratos desde OBRA_PUBLICA_CONTRATOS.csv filtrado por año
+            var filteredContratos = contratosData;
+            if (currentYearFilter !== 'todos') {
+                filteredContratos = contratosData.filter(function (c) { return c.year === currentYearFilter; });
+            }
+            var totalContratos = 0;
+            filteredContratos.forEach(function (c) { totalContratos += c.contratos; });
 
             document.getElementById('statObras').textContent = totalObras.toLocaleString('es-MX');
             document.getElementById('statInversion').textContent = formatMoneyFull(totalInversion);
@@ -1191,26 +1271,26 @@
                 juntas[d.junta] += d.monto_total;
             });
 
-            // Agrupar por contratista para el gráfico de avance
-            var contratistas = {};
-            filteredData.forEach(function (d) {
-                if (!contratistas[d.contratista]) contratistas[d.contratista] = { avance_sum: 0, count: 0 };
-                contratistas[d.contratista].avance_sum += d.avance_fisico;
-                contratistas[d.contratista].count++;
-            });
-
             var rubroKeys = Object.keys(rubros).sort(function (a, b) { return rubros[b].total - rubros[a].total; });
             var rubroTotals = rubroKeys.map(function (k) { return rubros[k].total; });
 
             var juntaKeys = Object.keys(juntas).sort(function (a, b) { return juntas[b] - juntas[a]; });
             var juntaTotals = juntaKeys.map(function (k) { return juntas[k]; });
 
-            var contratistaKeys = Object.keys(contratistas).sort(function (a, b) {
-                return (contratistas[b].avance_sum / contratistas[b].count) - (contratistas[a].avance_sum / contratistas[a].count);
+            // Agrupar contratos desde OBRA_PUBLICA_CONTRATOS.csv
+            var filteredContratos = contratosData;
+            if (currentYearFilter !== 'todos') {
+                filteredContratos = contratosData.filter(function (c) { return c.year === currentYearFilter; });
+            }
+            var contratosAgrupados = {};
+            filteredContratos.forEach(function (c) {
+                if (!contratosAgrupados[c.obra]) contratosAgrupados[c.obra] = 0;
+                contratosAgrupados[c.obra] += c.contratos;
             });
-            var avanceValues = contratistaKeys.map(function (k) {
-                return (contratistas[k].avance_sum / contratistas[k].count * 100).toFixed(1);
+            var contratosKeys = Object.keys(contratosAgrupados).sort(function (a, b) {
+                return contratosAgrupados[b] - contratosAgrupados[a];
             });
+            var contratosValues = contratosKeys.map(function (k) { return contratosAgrupados[k]; });
 
             if (chartRubro) chartRubro.destroy();
             if (chartJunta) chartJunta.destroy();
@@ -1273,19 +1353,17 @@
                 }
             });
 
-            // Avance Físico Promedio por Contratista
+            // Contratos Realizados (desde OBRA_PUBLICA_CONTRATOS.csv)
             chartAvance = new Chart(document.getElementById('chartAvance'), {
                 type: 'bar',
                 data: {
-                    labels: contratistaKeys,
+                    labels: contratosKeys,
                     datasets: [{
-                        label: 'Avance Físico (%)',
-                        data: avanceValues,
-                        backgroundColor: avanceValues.map(function (v) {
-                            if (v >= 80) return '#2E7D32';
-                            if (v >= 50) return '#F9A825';
-                            return '#C62828';
-                        }),
+                        label: 'Número de Contratos',
+                        data: contratosValues,
+                        backgroundColor: chartColors.slice(0, contratosKeys.length),
+                        borderColor: chartColors.slice(0, contratosKeys.length),
+                        borderWidth: 1,
                         borderRadius: 6
                     }]
                 },
@@ -1295,10 +1373,10 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: { display: false },
-                        tooltip: { callbacks: { label: function (ctx) { return ctx.raw + '%'; } } }
+                        tooltip: { callbacks: { label: function (ctx) { return ctx.raw + ' contratos'; } } }
                     },
                     scales: {
-                        x: { max: 100, ticks: { callback: function (v) { return v + '%'; } }, grid: { color: 'rgba(0,0,0,0.05)' } },
+                        x: { ticks: { stepSize: 1, font: { size: 11 } }, grid: { color: 'rgba(0,0,0,0.05)' } },
                         y: { ticks: { font: { size: 11 } }, grid: { display: false } }
                     }
                 }

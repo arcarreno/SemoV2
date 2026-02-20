@@ -477,8 +477,7 @@ iframe {
 /* --- CARRUSEL RESPONSIVE: TABLET --- */
 @media (max-width: 768px) {
     .hero-carousel {
-        height: 0;
-        padding-bottom: 33.3%;
+        height: 280px;
         max-width: 100%;
         width: 100%;
         overflow: hidden;
@@ -495,8 +494,7 @@ iframe {
     }
 
     .slide-image {
-        object-fit: contain;
-        background: #000;
+        object-fit: cover;
         max-width: 100%;
         width: 100%;
     }
@@ -544,13 +542,11 @@ iframe {
 /* --- CARRUSEL RESPONSIVE: MÓVIL --- */
 @media (max-width: 480px) {
     .hero-carousel {
-        height: 0;
-        padding-bottom: 33.3%;
+        height: 200px;
     }
 
     .slide-image {
-        object-fit: contain;
-        background: #000;
+        object-fit: cover;
     }
 
     .slide-title {
@@ -1324,7 +1320,7 @@ iframe {
     }
 
     .hero-carousel {
-        height: 500px;
+        height: 400px;
     }
 
     .slide-title {
@@ -1377,11 +1373,12 @@ iframe {
     }
 
     .hero-carousel {
-        height: 400px;
+        height: 280px;
     }
 
     .slide-image {
-        object-position: center top;
+        object-fit: cover;
+        object-position: center center;
     }
 
     .slide-title {
@@ -1459,7 +1456,7 @@ iframe {
     }
 
     .hero-carousel {
-        height: 300px;
+        height: 200px;
     }
 
     .slide-title {
@@ -1518,7 +1515,7 @@ iframe {
 /* --- MUY PEQUEÑO (320px) --- */
 @media (max-width: 360px) {
     .hero-carousel {
-        height: 250px;
+        height: 180px;
     }
 
     .slide-title {
@@ -2014,4 +2011,44 @@ body.dark-mode .stat-number {
 
 body.dark-mode .stat-label {
     color: #ccc;
+}
+
+.featured-box {
+    justify-content: center;
+    text-align: center;
+    background-color: var(--verde-3);
+    color: var(--blanco);
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid var(--dorado-8);
+    box-shadow: 0 10px 30px rgba(125, 36, 71, 0.2);
+    max-width: 1200px;
+}
+
+@media (min-width: 768px) {
+    .featured-box {
+        text-align: center;
+        justify-content: center;
+        flex-direction: row;
+        text-align: left;
+    }
+}
+
+.featured-icon {
+
+    font-size: 3rem;
+    color: var(--crema-4);
+}
+
+.featured-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--crema-4);
 }
