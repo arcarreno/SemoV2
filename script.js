@@ -1,4 +1,21 @@
 
+// Reiniciar estado del navbar móvil al cargar página
+(function() {
+    const toggler = document.querySelector('.navbar-toggler');
+    if (toggler) {
+        // Asegurar que el toggler tenga la clase collapsed (menú cerrado)
+        toggler.classList.add('collapsed');
+        toggler.setAttribute('aria-expanded', 'false');
+    }
+    
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    if (navbarCollapse) {
+        // Asegurar que el menú esté cerrado
+        navbarCollapse.classList.remove('show');
+        navbarCollapse.classList.add('collapse');
+    }
+})();
+
 const faqData = {
     estudiante: [
         {
