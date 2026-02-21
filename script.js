@@ -84,10 +84,17 @@ const pagesData = {
 
 // DOM Ready
 document.addEventListener('DOMContentLoaded', function () {
-    // Preloader de 2 segundos
+    // Preloader de 2 segundos con animación de transición de página
     setTimeout(function () {
         const preloader = document.getElementById('preloader');
-        preloader.classList.add('hidden');
+        if (preloader) {
+            preloader.classList.add('hidden');
+            
+            // Remover el preloader del DOM después de la animación
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 600);
+        }
 
         // Habilitar scroll
         document.body.style.overflow = 'auto';
@@ -593,34 +600,58 @@ function initAnimations() {
 document.addEventListener('DOMContentLoaded', function () {
     const nav = document.querySelector('.main-nav');
     if (nav) {
-        let navOffsetTop = nav.offsetTop;
-        let spacer = null;
+        // Usar un pequeño delay para asegurar que todo está cargado
+        setTimeout(function() {
+            let navOffsetTop = nav.offsetTop;
+            let spacer = null;
+            let hasAddedFixedClass = false;
 
-        function handleStickyNav() {
-            if (window.scrollY >= navOffsetTop) {
+            function handleStickyNav() {
+                if (window.scrollY >= navOffsetTop) {
+                    if (!nav.classList.contains('navbar-fixed')) {
+                        // Crear spacer con la misma altura exacta
+                        spacer = document.createElement('div');
+                        spacer.style.height = nav.offsetHeight + 'px';
+                        spacer.style.width = '100%';
+                        spacer.style.margin = '0';
+                        spacer.style.padding = '0';
+                        spacer.style.display = 'block';
+                        spacer.id = 'navbar-spacer';
+                        
+                        // Insertar antes del nav
+                        nav.parentNode.insertBefore(spacer, nav);
+                        
+                        // Agregar clase fixed
+                        nav.classList.add('navbar-fixed');
+                        
+                        // Solo agregar animación la primera vez
+                        if (!hasAddedFixedClass) {
+                            nav.classList.add('animate-in');
+                            hasAddedFixedClass = true;
+                        }
+                    }
+                } else {
+                    if (nav.classList.contains('navbar-fixed')) {
+                        nav.classList.remove('navbar-fixed');
+                        nav.classList.remove('animate-in');
+                        
+                        const existingSpacer = document.getElementById('navbar-spacer');
+                        if (existingSpacer) existingSpacer.remove();
+                        
+                        spacer = null;
+                        hasAddedFixedClass = false;
+                    }
+                }
+            }
+
+            window.addEventListener('scroll', handleStickyNav);
+            
+            window.addEventListener('resize', function() {
                 if (!nav.classList.contains('navbar-fixed')) {
-                    spacer = document.createElement('div');
-                    spacer.style.height = nav.offsetHeight + 'px';
-                    spacer.id = 'navbar-spacer';
-                    nav.parentNode.insertBefore(spacer, nav);
-                    nav.classList.add('navbar-fixed');
+                    navOffsetTop = nav.offsetTop;
                 }
-            } else {
-                if (nav.classList.contains('navbar-fixed')) {
-                    nav.classList.remove('navbar-fixed');
-                    const existingSpacer = document.getElementById('navbar-spacer');
-                    if (existingSpacer) existingSpacer.remove();
-                    spacer = null;
-                }
-            }
-        }
-
-        window.addEventListener('scroll', handleStickyNav);
-        window.addEventListener('resize', () => {
-            if (!nav.classList.contains('navbar-fixed')) {
-                navOffsetTop = nav.offsetTop;
-            }
-        });
+            });
+        }, 100);
     }
 });
 

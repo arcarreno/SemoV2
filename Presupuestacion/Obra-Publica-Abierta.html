@@ -7,7 +7,6 @@
     <title>Obra Pública Abierta - Transparencia Presupuestaria Puebla</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -17,48 +16,34 @@
 
     <link rel="stylesheet" href="../styles.css">
 
+    <!-- Estilos específicos para el navbar fixed en esta página -->
     <style>
-        @media (max-width: 1199.98px) {
-
-
-            .navbar-collapse {
-                background-color: var(--guinda-1);
-                padding: 15px;
-                margin-top: 10px;
-                border-radius: 8px;
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-
-            }
-
-            .navbar-collapse .nav-link {
-                color: #ffffff !important;
-                border-radius: 5px;
-            }
-
-            /* Fondo guinda también para los submenús  */
-            .navbar-collapse .dropdown-menu {
-                background-color: transparent;
-                border: none;
-                padding-left: 15px;
-                /* Sangría para diferenciar el submenú */
-                margin-top: 0;
-            }
-
-            /* Letras blancas para los elementos dentro de los submenús */
-            .navbar-collapse .dropdown-item {
-                color: #ffffff !important;
-                border-radius: 5px;
-            }
-
-            /* Efecto Hover al pasar el dedo/mouse en móvil (Fondo traslúcido y letras doradas) */
-            .navbar-collapse .nav-link:hover,
-            .navbar-collapse .dropdown-item:hover,
-            .navbar-collapse .nav-link.active {
-                background-color: rgba(255, 255, 255, 0.1) !important;
-                color: var(--dorado-8) !important;
-            }
+        .main-nav.navbar-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 1030;
         }
+        
+        .main-nav.navbar-fixed.animate-in {
+            animation: slideDownNavbar 0.3s ease forwards;
+        }
+        
+        @keyframes slideDownNavbar {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        
+        #navbar-spacer {
+            display: block;
+            width: 100%;
+        }
+    </style>
 
+    <style>
         /* ESTILOS GENERALES Y HEADER */
         .page-header {
             background-color: var(--guinda-1);
@@ -314,19 +299,22 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.6s ease;
         }
 
         .preloader.hidden {
+            transform: translateY(-100%);
             opacity: 0;
-            visibility: hidden;
+            pointer-events: none;
         }
 
         .loader-img {
             width: 150px;
             height: auto;
             object-fit: contain;
+            border-radius: 50%;
             animation: latido 2s infinite ease-in-out;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         @keyframes latido {
@@ -538,7 +526,7 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-xl sticky-top main-nav shadow-sm p-0">
+    <nav class="navbar navbar-expand-xl main-nav shadow-sm p-0">
         <div class="container nav-content py-2">
 
             <a class="navbar-brand d-flex align-items-center" href="../index.html">
